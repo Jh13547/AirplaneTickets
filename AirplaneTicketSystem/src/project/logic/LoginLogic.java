@@ -39,11 +39,11 @@ public class LoginLogic {
 	}
 	
 	
-	public boolean login(User u) {
-		//TODO login logic
+	public String login(User u) {
+		//TODO login logic should return user id to be used in session tracking
 		String query;
-		
-		return true;
+		String userID = null;
+		return userID;
 		
 	}
 	

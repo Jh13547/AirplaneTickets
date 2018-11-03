@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import project.db.*;
 import project.logic.*;
@@ -31,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 		
 		private static final long serialVersionUID = 1L;
 		private String tempDir = "/WEB-INF/template";
-	    Configuration cfg;
+	    javax.security.auth.login.Configuration cfg;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -91,7 +92,8 @@ super.init(config);
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		// TODO attach logic to handle web pages
 		
-		
+		HttpSession session = request.getSession();
+		synchronized(session) {
 		//servlet handling for signup page code works don't touch me should be an example for how the logic is set up to be handled
 		if(request.getParameter("signUp") != null) {
 			String firstname = request.getParameter("fn");
@@ -107,9 +109,13 @@ super.init(config);
 			else
 				System.out.println("Failure");
 		}
+		if(request.getParameter("login") != null) {
+			
+		}
 		
 			
-			
+		}
+		
 			
 		
 		}
