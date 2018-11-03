@@ -52,7 +52,7 @@ window.onload = function(){
 		if(pass.value==""){
 			passError.innerHTML="The Password  must be filled in";
 			return false;
-		}else if(!(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-zA-Z]).{8,15}$/).test(pass.value)){
+		}else if(!(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z]).{8,15}$/).test(pass.value)){
 			passError.innerHTML="The Pass must contain at least ONE capital letter, ONE digit, and be 8-15 characters long";
 			return false;
 		}else if(pass.value!=document.getElementById("PassText2").value){
