@@ -47,4 +47,4 @@
 		</tr>
 	</table>
 </form>
-<input type="submit" id="Signupbtn" name="submit" value="Signup"></input>
+<input type="submit" id="Signupbtn" name="signUp" value="Signup"></input>
