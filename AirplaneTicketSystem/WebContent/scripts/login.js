@@ -2,8 +2,8 @@ window.onload = function(){
 	//Getting the elements
 	var submitbtn = document.getElementById("Loginbtn");
 	var loginForm = document.getElementById("LoginForm");
-	var user = document.getElementById("UserText");
-	var userError = document.getElementById("UserError");
+	var email = document.getElementById("EmailText");
+	var emailError = document.getElementById("EmailError");
 	var pass = document.getElementById("PassText");
 	var passError = document.getElementById("PassError");
 	
@@ -19,19 +19,19 @@ window.onload = function(){
 	}
 	
 	//When a key is released and one of the inputs are focused
-	//user.onkeyup = userCheck;
+	//email.onkeyup = emailCheck;
 	//pass.onkeyup = passCheck;
 	
 	//Checks if valid email, using a regualr expression
 	function emailCheck(){
-		if(user.value==""){
-			userError.innerHTML="The Email must be filled in";
+		if(email.value==""){
+			emailError.innerHTML="The Email must be filled in";
 			return false;
-		}else if(!(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+$/).test(user.value)){
-			userError.innerHTML="The Email must be an  valid email";
+		}else if(!(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+$/).test(email.value)){
+			emailError.innerHTML="The Email must be an  valid email";
 			return false;
 		}
-		userError.innerHTML="";
+		emailError.innerHTML="";
 		return true
 	}
 	
