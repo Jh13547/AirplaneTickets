@@ -2,11 +2,11 @@ window.onload = function(){
 	//Getting the elements
 	var submitbtn = document.getElementById("Signupbtn");
 	var loginForm = document.getElementById("SignupForm");
-	var user = document.getElementById("UserText");
+	var email = document.getElementById("EmailText");
 	var pass = document.getElementById("PassText");
 	var first = document.getElementById("FirstText");
 	var last = document.getElementById("LastText");
-	var userError = document.getElementById("UserError");
+	var emailError = document.getElementById("EmailError");
 	var passError = document.getElementById("PassError");
 	var firstError = document.getElementById("FirstError");
 	var lastError = document.getElementById("LastError");
@@ -28,22 +28,22 @@ window.onload = function(){
 	}
 	
 	//When a key is released and one of the inputs are focused
-	//user.onkeyup = userCheck;
+	//email.onkeyup = emailCheck;
 	//pass.onkeyup = passCheck;
 	
 	//Checks if valid email, using a regualr expression
 	function emailCheck(){
-		if(user.value==""){
-			userError.innerHTML="The Email must be filled in";
+		if(email.value==""){
+			emailError.innerHTML="The Email must be filled in";
 			return false;
-		}else if(!(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+$/).test(user.value)){
-			userError.innerHTML="The Email must be an  valid email";
+		}else if(!(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+$/).test(email.value)){
+			emailError.innerHTML="The Email must be an  valid email";
 			return false;
-		}else if(user.value!=document.getElementById("UserText2").value){
-			userError.innerHTML="The Emails must match ";
+		}else if(email.value!=document.getElementById("EmailText2").value){
+			emailError.innerHTML="The Emails must match ";
 			return false;
 		}
-		userError.innerHTML="";
+		emailError.innerHTML="";
 		return true
 	}
 	
