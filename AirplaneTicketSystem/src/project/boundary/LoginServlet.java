@@ -88,62 +88,63 @@ public class LoginServlet extends HttpServlet {
 	 */
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("Get method");
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		// TODO attach logic to handle web pages
 		
 		HttpSession session = request.getSession();
 		synchronized(session) {
-		//servlet handling for signup page code works don't touch me should be an example for how the logic is set up to be handled
-
-		if(request.getParameter("signUp") != null) {
-			String firstname = request.getParameter("first");
-			String lastname = request.getParameter("last");
-			String uemail = request.getParameter("email");
-
-			String upass = request.getParameter("pass");
-			User u = new User(firstname, lastname, uemail, upass);
-			LoginLogic log = new LoginLogic();
-			Boolean signedup = log.signUp(u);
-			if(signedup) {
-				System.out.println("Success");
+			
+			//servlet handling for signup page code works don't touch me should be an example for how the logic is set up to be handled
+			if(request.getParameter("signup") != null) {
+				String firstname = request.getParameter("first");
+				String lastname = request.getParameter("last");
+				String uemail = request.getParameter("email");
+	
+				String upass = request.getParameter("pass");
+				User u = new User(firstname, lastname, uemail, upass);
+				LoginLogic log = new LoginLogic();
+				Boolean signedup = log.signUp(u);
+				if(signedup) {
+					System.out.println("Success");
+				}
+				else
+					System.out.println("Failure");
 			}
-			else
-				System.out.println("Failure");
-		}
-			
-			
-		//code for handling log in request and allowing user id to be stored in the session
-		if(request.getParameter("lsubmit") != null) {
-			String user = request.getParameter("user");
-			String pass = request.getParameter("pass");
-			LoginLogic log = new LoginLogic();
-			String id = log.login(user, pass);
-			
-			//if id is null something went wrong with retreiving this user
-			if(id == null) {
-				System.out.println("Show error message here");
 				
+				
+			//code for handling log in request and allowing user id to be stored in the session
+			if(request.getParameter("login") != null) {
+				String user = request.getParameter("email");
+				String pass = request.getParameter("pass");
+				System.out.println(user+" "+pass);
+				LoginLogic log = new LoginLogic();
+				String id = log.login(user, pass);
+				
+				//if id is null something went wrong with retreiving this user
+				if(id == null) {
+					System.out.println("Show error message here/call login ftl again with failed boolean");
+					
+				}
+				else {
+					//set user id as session attribute
+					session.setAttribute("userid", id);
+				
+					//print userid for the session
+					System.out.println(session.getAttribute("userid"));
+					
+				}
+				
+						
+						
 			}
-			else
-				//set user id as session attribute
-				session.setAttribute("userid", id);
-			
-				//print userid for the session
-				System.out.println(session.getAttribute("userid"));
-				
-			
-			
-					
-					
-		}
-		
+			System.out.println(session.toString());
 			
 		}
 		
 			
-		
-		}
+		System.out.println("End of GET");
+	}
 		//end of method stub
 		
 	
@@ -153,6 +154,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("post");
 		doGet(request, response);
 	}
 

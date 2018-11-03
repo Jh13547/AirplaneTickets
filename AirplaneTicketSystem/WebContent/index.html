@@ -1,5 +1,6 @@
+<html>
 <script type="text/javascript" src="scripts/Signup.js"></script>
-<form id="SignupForm">
+<form id="SignupForm" action="LoginServlet" method="Post">
 	<table>
 		<tr>
 			<td>First name: 
@@ -12,7 +13,7 @@
 		<tr>
 			<td>Last name:
 			</td>
-			<td><input id="LastText" type="text" name="pass"></input>
+			<td><input id="LastText" type="text" name="last"></input>
 			</td>
 			<td><div id="LastError"class="error"style="color:red;"></div>
 			</td>
@@ -46,5 +47,8 @@
 			</td>
 		</tr>
 	</table>
+	<input type="hidden" name="signup" value="signup">
 </form>
 <input type="submit" id="Signupbtn" name="signUp" value="Signup"></input>
+
+</html>
