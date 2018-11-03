@@ -7,6 +7,8 @@ import project.object.Flights;
 import project.object.Planes;
 import project.object.User;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,10 +41,28 @@ public class LoginLogic {
 	}
 	
 	
-	public String login(User u) {
+	public String login(String user, String pass) {
 		//TODO login logic should return user id to be used in session tracking
-		String query;
+		String query = "select uid from login where " +
+					"uemail = \"" + user + "\"  and upass = \"" + pass + "\";";
+		
 		String userID = null;
+		db.connect();
+		ResultSet rs = null;
+		
+		rs = db.retrieve(query);
+		
+		
+		try {
+			while(rs.next()) {
+				userID = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		db.disconnect();
 		return userID;
 		
 	}

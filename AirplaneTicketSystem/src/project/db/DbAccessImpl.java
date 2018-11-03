@@ -64,7 +64,7 @@ public class DbAccessImpl extends DbAccessConfiguartion {
 		}
 		
 		try {
-			i = statement.executeLargeUpdate(query);
+			i = (int) statement.executeLargeUpdate(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,10 +73,10 @@ public class DbAccessImpl extends DbAccessConfiguartion {
 		
 	}
 	//statement to execute delete working
-	public static int delete(String query) {
+	public static boolean delete(String query) {
 		Statement statement = null;
 		
-		int i = 0;
+		boolean i = true;
 		try {
 			statement = conn.createStatement();
 		}

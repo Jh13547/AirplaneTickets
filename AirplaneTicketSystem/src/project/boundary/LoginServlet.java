@@ -95,7 +95,9 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		synchronized(session) {
 		//servlet handling for signup page code works don't touch me should be an example for how the logic is set up to be handled
-		if(request.getParameter("signUp") != null) {
+		
+			
+			if(request.getParameter("signUp") != null) {
 			String firstname = request.getParameter("fn");
 			String lastname = request.getParameter("ln");
 			String uemail = request.getParameter("uemail");
@@ -109,8 +111,31 @@ public class LoginServlet extends HttpServlet {
 			else
 				System.out.println("Failure");
 		}
-		if(request.getParameter("login") != null) {
 			
+			
+		//code for handling log in request and allowing user id to be stored in the session
+		if(request.getParameter("lsubmit") != null) {
+			String user = request.getParameter("user");
+			String pass = request.getParameter("pass");
+			LoginLogic log = new LoginLogic();
+			String id = log.login(user, pass);
+			
+			//if id is null something went wrong with retreiving this user
+			if(id == null) {
+				System.out.println("Show error message here");
+				
+			}
+			else
+				//set user id as session attribute
+				session.setAttribute("userid", id);
+			
+				//print userid for the session
+				System.out.println(session.getAttribute("userid"));
+				
+			
+			
+					
+					
 		}
 		
 			
