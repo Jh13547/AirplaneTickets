@@ -1,5 +1,5 @@
 <script type="text/javascript" src="scripts/login.js"></script>
-<form id="LoginForm">
+<form id="LoginForm" action="LoginServlet" method="Posts">
 	<table>
 		<tr>
 			<td>Email:
@@ -18,5 +18,6 @@
 			</td>
 		</tr>
 	</table>
+	<input type="hidden" name="login" value="login">
 </form>
 <input type="submit" id="Loginbtn" name="login" value="Login"></input><br>
