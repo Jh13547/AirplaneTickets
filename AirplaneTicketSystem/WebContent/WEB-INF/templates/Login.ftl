@@ -19,4 +19,4 @@
 		</tr>
 	</table>
 </form>
-<input type="submit" id="Loginbtn" name="submit" value="Login"></input><br>
+<input type="submit" id="Loginbtn" name="login" value="Login"></input><br>
