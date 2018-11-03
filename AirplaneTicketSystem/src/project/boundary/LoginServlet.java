@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 		
 		private static final long serialVersionUID = 1L;
 		private String tempDir = "/WEB-INF/template";
-	    javax.security.auth.login.Configuration cfg;
+	    Configuration cfg;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		
-super.init(config);
+		super.init(config);
 		
 		
 		// TODO Auto-generated method stub
