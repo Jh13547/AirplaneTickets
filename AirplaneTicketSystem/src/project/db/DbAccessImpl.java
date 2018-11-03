@@ -9,7 +9,6 @@ public class DbAccessImpl extends DbAccessConfiguartion {
 		//connect db classs
 		try {
 	        
-	         Class.forName("com.mysql.jdbc.Driver").newInstance();
 	         conn = DriverManager.getConnection(DbAccessConfiguartion.DB_CONNECTION_URL, DbAccessConfiguartion.DB_CONNECTION_USERNAME, DbAccessConfiguartion.DB_CONNECTION_PASSWORD);
 	         
 	     } catch (Exception ex) {
