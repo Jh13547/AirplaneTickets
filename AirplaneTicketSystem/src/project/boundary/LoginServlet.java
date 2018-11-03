@@ -94,8 +94,6 @@ public class LoginServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		synchronized(session) {
-			System.out.println("signup="+request.getParameter("signup")
-								+"  login="+request.getParameter("login"));
 			
 			//servlet handling for signup page code works don't touch me should be an example for how the logic is set up to be handled
 			if(request.getParameter("signup") != null) {
