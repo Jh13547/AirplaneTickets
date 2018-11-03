@@ -95,12 +95,12 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		synchronized(session) {
 		//servlet handling for signup page code works don't touch me should be an example for how the logic is set up to be handled
-		
-			
-			if(request.getParameter("signUp") != null) {
-			String firstname = request.getParameter("fn");
-			String lastname = request.getParameter("ln");
-			String uemail = request.getParameter("uemail");
+
+		if(request.getParameter("signUp") != null) {
+			String firstname = request.getParameter("first");
+			String lastname = request.getParameter("last");
+			String uemail = request.getParameter("email");
+
 			String upass = request.getParameter("pass");
 			User u = new User(firstname, lastname, uemail, upass);
 			LoginLogic log = new LoginLogic();
