@@ -7,6 +7,7 @@ import project.object.Flights;
 import project.object.Planes;
 import project.object.User;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -67,26 +68,91 @@ public class LoginLogic {
 		
 	}
 	
-	public List<Flights> rtnFlightList(String dep, String des, int month, int day, int year, int ticketsrequested){
-		//TODO create a function to return a list of flights to use in creationg
+	public List<Flights> rtnFlightList(String dep, String des, Date date, int ticketsrequested){
+		db.connect();
+		
 		List<Flights> lf = new ArrayList<>();
+		String query = "select * from flights where " +
+				"where airportDES = (select airportid from airport where citytag = \"" + des + "\" and " +
+				"airportDEP = (select airportid from airport where citytag =\"" + dep + "\" and " +
+				"departureTime = \"" + date + "\" and " +
+				ticketsrequested + " >= ttlseatsonplane - ttlseatsbooked;";
+		ResultSet rs = null;
+		rs = db.retrieve(query);
+		try {
+			while(rs.next()) {
+				try {
+					//create new flight object rs.getString(1) = id
+					//rs.getDate(7) = departure date
+					//rs.getInt(5) - rs.getInt(6) = ttlseats - bookedseats == available seats
+					Flights f = new Flights(rs.getString(1), rs.getDate(7), rs.getInt(5) - rs.getInt(6));
+					lf.add(f);
+					
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				
+				
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		db.disconnect();
+		//return list of flight objects here
 		return lf;
 		
 	}
+	//this thing is confusing and may or may not cause issues not sure yet. 
 	public boolean createFlight(Flights f) {
 		//TODO create a function to insert a flight in database return if the create worked or not
 		return true;
 	}
 	
 	public boolean createPlane(Planes p) {
-		//TODO create function insert a new plane
+		//first we have to get the compid because I thought that was a good idea 
+		
+		String getCompid = "select compid from planecomp " +
+							"where compane = \"" + p.getCompname() + "\";";
+		
+		db.connect();
+		int compid = 0;
+		ResultSet rs = null;
+		rs = db.retrieve(getCompid);
+		while(rs.next()) {
+			compid = rs.getInt(1);
+		}
+		
+		String query = "insert into planes (compid, ttlseats, planetype, inService) values(" + compid + ", " + p.getTtlseats() + ", \"" + p.getPlanetype() + "\", 1);";
+		
+		
+		int i = db.update(query);
+		
+		if(i > 0) {
 		
 		return true;
-	}
+		}
+		else return false;
+		}
 	
 	public boolean createCompany(Companies c) {
-		//TODO create function to insert a new company
+		//this is an easier function
+		String query = "INSERT INTO PLANECOMP(COMPNAME) VALUES ( \"" + c.getCompName() + "\" );";
+		
+		db.connect();
+		int i = db.create(query);
+		
+		
+		if(i > 0) {
 		return true;
+		}
+		else return false;
 	}
 	public boolean createBooking(Booking b) {
 		//TODO create function to insert new booking into the system
@@ -110,7 +176,24 @@ public class LoginLogic {
 		return true;
 	}
 	
-	
+	public List<String> getCompanies() throws SQLException{
+		//have to return company names otherwise stuff doesn't work right
+		List<String> complist = new ArrayList<>();
+		db.connect();
+		String query = "select planecomp.compname from planecomp;";
+		ResultSet rs = null;
+		rs = db.retrieve(query);
+		while(rs.next()) {
+			complist.add(rs.getString(1));
+		}
+		
+		db.disconnect();
+		
+		
+		//return list of all companies.
+		return complist;
+		
+	}
 	
 	
 	
