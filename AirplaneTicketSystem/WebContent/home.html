@@ -5,27 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>DisWeb Final Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/jquery-ui.js"></script>
     <script src="scripts/home.js"></script>
 </head>
 <body>
 
     <div class="bg">
         <div class="banner">
-            <form action="" method="post">
-                <input type="button" value="Login">
-                <input type="button" value="Signup">
-            </form>
+            <button id="loginBtn">Login</button>
+            <button id="signupBtn">Signup</button>
         </div>
         <div class="content">
-            <form action="" method="post">
-                <label for="">Destination:</label> <input type="text" name="destination" id="dest">
+            <form action="[servletname]" method="post">
+                <label for="">Departure:</label> 
+                <input type="text" name="departure" id="dept">
                 <br>
-                <label for="">Departure:</label> <input type="text" name="departure" id="dep">
+                <label for="">Destination:</label> 
+                <input type="text" name="destination" id="dest">
                 <br>
-                <label for="">Date:</label> <input type="date" name="date" id="date">
+                <label for="">Date:</label>
+                <input type="text" name="date" id="date">
                 <br>
-                <input type="submit" value="Search">
+                <input type="submit" value="Search" onclick="SearchClick">
             </form>
         </div>
     </div>
