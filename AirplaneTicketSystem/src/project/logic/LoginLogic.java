@@ -7,6 +7,7 @@ import project.object.Flights;
 import project.object.Planes;
 import project.object.User;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -67,50 +68,171 @@ public class LoginLogic {
 		
 	}
 	
-	public List<Flights> rtnFlightList(String dep, String des, int month, int day, int year, int ticketsrequested){
-		//TODO create a function to return a list of flights to use in creationg
+	public List<Flights> rtnFlightList(String dep, String des, Date date, int ticketsrequested){
+		db.connect();
+		
 		List<Flights> lf = new ArrayList<>();
+		String query = "select * from flights where " +
+				"where airportDES = (select airportid from airport where citytag = \"" + des + "\" and " +
+				"airportDEP = (select airportid from airport where citytag =\"" + dep + "\" and " +
+				"departureTime = \"" + date + "\" and " +
+				ticketsrequested + " >= ttlseatsonplane - ttlseatsbooked;";
+		ResultSet rs = null;
+		rs = db.retrieve(query);
+		try {
+			while(rs.next()) {
+				try {
+					//create new flight object rs.getString(1) = id
+					//rs.getDate(7) = departure date
+					//rs.getInt(5) - rs.getInt(6) = ttlseats - bookedseats == available seats
+					Flights f = new Flights(rs.getString(1), rs.getDate(7), rs.getInt(5) - rs.getInt(6));
+					lf.add(f);
+					
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				
+				
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		db.disconnect();
+		//return list of flight objects here
 		return lf;
 		
 	}
+	//this thing is confusing and may or may not cause issues not sure yet. 
 	public boolean createFlight(Flights f) {
 		//TODO create a function to insert a flight in database return if the create worked or not
+		//I made this hard to do you're welcome me.
 		return true;
 	}
 	
-	public boolean createPlane(Planes p) {
-		//TODO create function insert a new plane
+	public boolean createPlane(Planes p) throws SQLException {
+		//first we have to get the compid because I thought that was a good idea 
+		//DONE
+		
+		String getCompid = "select compid from planecomp " +
+							"where compane = \"" + p.getCompname() + "\";";
+		
+		db.connect();
+		int compid = 0;
+		ResultSet rs = null;
+		rs = db.retrieve(getCompid);
+		while(rs.next()) {
+			compid = rs.getInt(1);
+		}
+		
+		String query = "insert into planes (compid, ttlseats, planetype, inService) values(" + compid + ", " + p.getTtlseats() + ", \"" + p.getPlanetype() + "\", 1);";
+		
+		
+		int i = db.update(query);
+		
+		if(i > 0) {
 		
 		return true;
-	}
+		}
+		else return false;
+		}
 	
 	public boolean createCompany(Companies c) {
-		//TODO create function to insert a new company
+		//this is an easier function DONE
+		String query = "INSERT INTO PLANECOMP(COMPNAME) VALUES ( \"" + c.getCompName() + "\" );";
+		
+		db.connect();
+		int i = db.create(query);
+		
+		
+		
+		db.disconnect();
+		if(i > 0) {
 		return true;
+		}
+		else return false;
 	}
 	public boolean createBooking(Booking b) {
-		//TODO create function to insert new booking into the system
+		//Insert a booking query returns same values as every other create I make unfortunately
+		//this isn't exciting stuff
+		String  query = "Insert into bookedflights(uid, flightid, Amountbooked) values "+
+		 "( \"" + b.getUid() + "\" , \"" + b.getFlightid() + "\" , \"" + b.getAmountbooked() + "\");";
+		db.connect();
+		int i = db.create(query);
+		
+		db.disconnect();
+		if(i > 0) {
+		
+		
 		return true;
+		}
+		
+		else return false;
 	}
 	public boolean createAirport(Airport a) {
-		//TODO create function to insert a new airport
+		//DONE
+		String query = "Insert into airport(citytag, statetag, countrytag) values " +
+						"( \"" + a.getCity() + "\" , \"" + a.getState() + "\" , \"" + a.getCountry() + "\" );";
+		
+		db.connect();
+		int i = db.create(query);
+		db.disconnect();
+		if(i > 0) {
+		
 		return true;
+		}
+		else return false;
 	}
-	public List<Booking> getBookings(User u){
-		//TODO create function to allow a user to retrieve his bookings
+	public List<Booking> getBookings(String uid) throws SQLException{
+		//DONE
+		
+		String query = "select * from bookedflights where "+
+		"uid = \"" + uid + "\";";
+		ResultSet rs = null;
+		db.connect();
 		
 		
 		List<Booking> lb = new ArrayList<>();
+		
+		rs = db.retrieve(query);
+		while(rs.next()) {
+			Booking b = new Booking(rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5));
+			lb.add(b);
+		}
+		
 		return lb;
 	}
 	
 	public boolean updatePassword(User u) {
-		//TODO create functionality for a user to update his password
+		//TODO create ability for user to update his password (Low priority)
 		
 		return true;
 	}
 	
-	
+	public List<String> getCompanies() throws SQLException{
+		//have to return company names otherwise stuff doesn't work right
+		List<String> complist = new ArrayList<>();
+		db.connect();
+		String query = "select planecomp.compname from planecomp;";
+		ResultSet rs = null;
+		rs = db.retrieve(query);
+		while(rs.next()) {
+			complist.add(rs.getString(1));
+		}
+		
+		db.disconnect();
+		
+		
+		//return list of all companies.
+		return complist;
+		
+	}
 	
 	
 	
