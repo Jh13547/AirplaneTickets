@@ -36,56 +36,91 @@ public class BannerServlet extends HttpServlet {
     //It also loads templates by retrieving templates as strings and passing them to the response writer as 'reply'
     //This is used to load the login/signup templates as a popup from a ajax request
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String reply="fail",template=request.getParameter("template"),
+		String reply="fail",action=request.getParameter("action"),
 				email=request.getParameter("email"),pass=request.getParameter("pass");
 		response.setContentType("text/html");
-		//if the request isnt for a template then it will try to login or signup
-		if(template==null) {
-			HttpSession session = request.getSession();
-			synchronized(session) {
-				//if logging in
-				if(request.getParameter("action").equals("login")) {
-					System.out.println("Trying to login...");
-					//if current session email is null
-					if(session.getAttribute("email")==null){
-						//try to sign in
-						String id=LoginLogic.login(request.getParameter("email"),request.getParameter("pass"));
-						//if user was found/not found
-						if(id==null) {
-							reply="fail";
-							System.out.println("login not found");
-						}else{
-							session.setAttribute("email",request.getParameter("email"));
-							reply="success";
-							System.out.println("login Sucessful id="+id);
-						}
-					//if session isn't null, then you should be already signed in
-					}else{
-						System.out.println("found session with '"+session.getAttribute("email")+"'");
-						reply="success";
-					}
-				//If signning up
-				}else if(request.getParameter("action").equals("signup")) {
-					String first = request.getParameter("first");
-					String last = request.getParameter("last");
-					User u = new User(first, last, email, pass);
-					if(LoginLogic.signUp(u)) {
-						System.out.println("signup=Success");
-						reply="success";
-					}
-					else {
-						System.out.println("signup=Failure");
+		//if the request isn't for a template then it will try to login or signup
+		HttpSession session = request.getSession();
+		synchronized(session) {
+			
+			
+			//if logging in
+			if(request.getParameter("action").equals("login")) {
+				System.out.println("Trying to login...");
+				
+				//if current session email is null
+				if(session.getAttribute("user")==null){
+					//try to sign in
+					String id=LoginLogic.login(request.getParameter("email"),request.getParameter("pass"));
+					System.out.println("found id="+id);
+					String[] names=LoginLogic.getFirstLast(id);
+					//if user was found/not found
+					if(id==null) {
 						reply="fail";
+						System.out.println("login not found");
+					}else{
+						session.setAttribute("user",new User(id,names[0],names[1],email,pass));
+						reply="success";
+						System.out.println("login Sucessful id="+id);
 					}
+					
+				//if session isn't null, then you should be already signed in
+				}else{
+					System.out.println("found session with '"+session.getAttribute("user"));
+					reply="success";
+				}
+				
+				
+				
+			//If signning up
+			}else if(request.getParameter("action").equals("signup")) {
+				String first = request.getParameter("first");
+				String last = request.getParameter("last");
+				User user = new User(first, last, email, pass);
+				if(LoginLogic.signUp(user)) {
+					System.out.println("signup=Success");
+					session.setAttribute("user", user);
+					reply="success";
+				}
+				else {
+					System.out.println("signup=Failure");
+					reply="fail";
 				}
 			}
-		//if template isn't null then respond with the template requested template
-		}else{
-			try{
-				reply=cfg.getTemplate(template+".ftl").toString();
-				System.out.println("Requested '"+template+".ftl'");
-			}catch(Exception e) {
-				reply="fail";
+			
+			
+			
+			//if template isn't null then respond with the template requested template
+			else if(action.equals("template")){
+				String template=request.getParameter("template");
+				try{
+					reply=cfg.getTemplate(template+".ftl").toString();
+					System.out.println("Requested '"+template+".ftl'");
+				}catch(Exception e) {
+					reply="fail";
+				}
+			
+			
+			
+			//Sees if there is a session, if so then return the user (probably need to use json here)
+			}else if(action.equals("session")) {
+				
+				if(session.getAttribute("user")==null) {
+					
+					reply="fail";
+				}else{
+					User user=(User) session.getAttribute("user");
+					System.out.println("found user="+user.getFirstName()+","+user.getEmail());
+					reply=user.toString();
+				}
+				
+				
+			//invalidates the session
+			}else if(action.equals("signout")) {
+				if (session != null) 
+				    session.invalidate();
+				///////////////////////need to refresh the page to the home screen, so if they're on they're accoutn page it will leave it.
+				reply="session invalidated";
 			}
 		}
 		response.getWriter().write(reply);

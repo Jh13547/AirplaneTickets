@@ -38,6 +38,5 @@
 			<td colspan="2"><div id="PassError"class="error"style="color:red;"></div></td>
 		</tr>
 	</table>
-	<input type="hidden" name="signup" value="signup">
 </form>
 <input type="submit" id="Signupbtn" name="signup" value="Signup" onclick="signup()"></input>
