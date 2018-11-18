@@ -16,6 +16,5 @@
 			<td colspan="2"><div id="PassError"class="error"style="color:red;"></div></td>
 		</tr>
 	</table>
-	<input type="hidden" name="login" value="login">
 </form>
 <input type="submit" id="Loginbtn" name="login" value="Login" onclick="login()"></input><br>
