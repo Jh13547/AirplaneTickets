@@ -48,3 +48,8 @@ div
     width: 68%;
     left: 28%
 }
+
+#returnDateEffect
+{
+    position: relative;
+}

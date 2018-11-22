@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,7 @@
                     <br>
                     <label for="">Airline:</label> <select name="AirlineOption" id="AirlineOp">
                     
-                                                  <#list airLines as airline>
+                                                  <#list airlines as airline>
 												<option value="${airline}">${airline}</option>
 												</#list>
                                                     </select>
@@ -55,4 +56,5 @@
 
         </div>
 </body>
+
 </html>
