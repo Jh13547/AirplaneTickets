@@ -18,7 +18,7 @@ import project.db.*;
 public class LoginLogic {
 	DbAccessImpl db = new DbAccessImpl();
 	
-	//method to allow user sign up 
+	//method to allow user sign up shows how calls should work
 	public boolean signUp(User u) {
 		
 		//set up query for creating a new user
@@ -26,7 +26,7 @@ public class LoginLogic {
 						"( \"" + u.getFirstName() + "\" , \"" + u.getLastName() + "\" , \"" + u.getPassword() +
 						"\" , \"" + u.getEmail() + "\" , 0);";
 		
-		//db stuff call connect and disconnect before and after
+		//db stuff call connect and disconnect before and after 
 		db.connect();
 		int j = db.create(query);
 		db.disconnect();
@@ -67,6 +67,7 @@ public class LoginLogic {
 		
 	}
 	
+
 	public String[] getFirstLast(String id) {
 		//Returns a string array that contains the first and last name
 		String[] names = new String[2];
@@ -84,16 +85,22 @@ public class LoginLogic {
 		return names;
 	}
 	
-	public List<Flights> rtnFlightList(String dep, String des, Date date, int ticketsrequested){
+		public List<Flights> rtnFlightList(String dep, String des, String date){
+
 		db.connect();
 		
 		List<Flights> lf = new ArrayList<>();
 		String query = "select * from flights where " +
 				"where airportDES = (select airportid from airport where citytag = \"" + des + "\" and " +
 				"airportDEP = (select airportid from airport where citytag =\"" + dep + "\" and " +
-				"departureTime = \"" + date + "\" and " +
-				ticketsrequested + " >= ttlseatsonplane - ttlseatsbooked;";
+				"INSTR(departureTime, \""  + date +  "\")";
+		
+		
+		
+		System.out.println(query);
 		ResultSet rs = null;
+		
+		System.out.println(query);
 		rs = db.retrieve(query);
 		try {
 			while(rs.next()) {
@@ -103,16 +110,9 @@ public class LoginLogic {
 					//rs.getInt(5) - rs.getInt(6) = ttlseats - bookedseats == available seats
 					Flights f = new Flights(rs.getString(1), rs.getDate(7), rs.getInt(5) - rs.getInt(6));
 					lf.add(f);
-					
-					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
-				
-				
 				
 			}
 		} catch (SQLException e) {
@@ -128,7 +128,9 @@ public class LoginLogic {
 	//this thing is confusing and may or may not cause issues not sure yet. 
 	public boolean createFlight(Flights f) {
 		//TODO create a function to insert a flight in database return if the create worked or not
-		//I made this hard to do you're welcome me.
+		//I'm just writting a function to get ids for this and planes b/c man
+		
+	
 		return true;
 	}
 	
@@ -231,7 +233,8 @@ public class LoginLogic {
 		return true;
 	}
 	
-	public List<String> getCompanies() throws SQLException{
+	public List<String> getCompanies() throws SQLException
+	{
 		//have to return company names otherwise stuff doesn't work right
 		List<String> complist = new ArrayList<>();
 		db.connect();
@@ -250,22 +253,58 @@ public class LoginLogic {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public boolean updateSeatCount(int seatsbought, int flightid) throws SQLException
+	{
+		//mfw I realize I have to update seat count probably at some point
+		//mfw I am making this way harder than it needs to be 
+		//this function needs to pull seat count though at some point.
+		//maybe create another function to pull seatcount
+		//yeah that makes more sense I'm gonna do that
 		
+		return true;
+	}
+	
+	
+	public List<String> getAirports(String city) throws SQLException
+	{
+	//hey you'll need me later gj realizing this early
+		
+		//this query checks the starting digit should work with AJAX call so it's selecting whatever you begin typing i.e 
+		//"A" should return atlanta and austin but then At will only return atlanta
+		String query = "select citytag from airports" +
+	" where citytag like \"" + city + "%\";";
+		db.connect();
+		
+		List<String> myAirportList = new ArrayList<>();
+		ResultSet rs = null;
+		rs = db.retrieve(query);
+		
+		while(rs.next()) {
+			myAirportList.add(rs.getString(1));
+			
+		}
+		db.disconnect();
+		return myAirportList;					
+	}
+	
+	public int getAirportid(String des) {
+		return 0;
+		//TODO function to get an airport id realized I needed this function to clean code :') feels bad man
+		
+	}
+	
+	
+	
+	public int getSeatCount(int flightid) {
+		//TODO function to get seat count to help with other functions otherwise it becomes a pain to deal with 
+		//also could be used to do other things in the view that looks cool ie show sold out flights, keep track of 
+		//flights that aren't sold idk this class is getting kinda wild, not hard just wild]
+		
+		
+		
+		return 0;
+	}
 	
 	
 }
+//end of method stub

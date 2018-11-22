@@ -134,8 +134,6 @@ public class LoginServlet extends HttpServlet {
 					System.out.println(session.getAttribute("userid"));
 					
 				}
-				
-						
 						
 			}
 			System.out.println(session.toString());
