@@ -59,7 +59,6 @@ public class LoginLogic {
 				userID = rs.getString(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -68,7 +67,26 @@ public class LoginLogic {
 		
 	}
 	
-	public List<Flights> rtnFlightList(String dep, String des, String date){
+
+	public String[] getFirstLast(String id) {
+		//Returns a string array that contains the first and last name
+		String[] names = new String[2];
+		db.connect();
+		ResultSet rs = db.retrieve("Select firstname,lastname from login where uid='"+id+"';");
+		try {
+			rs.next();
+			names[0] = rs.getString("firstname");
+			names[1] = rs.getString("lastname");
+		}catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println("UID might not exist");
+		}
+		db.disconnect();
+		return names;
+	}
+	
+		public List<Flights> rtnFlightList(String dep, String des, String date){
+
 		db.connect();
 		
 		List<Flights> lf = new ArrayList<>();

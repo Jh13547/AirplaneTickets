@@ -5,24 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="styles/search.css" />
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/jquery-ui.js"></script>
     <script src="scripts/search.js"></script>
 </head>
 <body>
         <div class="bg">
 
-            <div class="banner" id="banner">
-
-                <form action="" method="post">
-                    <input type="button" value="Login">
-                    <input type="button" value="Signup">
-                </form>
-
+            <div class="banner">
+                <button id="loginBtn">Login</button>
+                <button id="signupBtn">Signup</button>
             </div>
 
             <div class="searchCriteria" id="searchCri">
 
                 <h2>Search Criteria</h2>
+
 
                 <form action="FlightSearchLogin" method="POST">
                 	<table>
