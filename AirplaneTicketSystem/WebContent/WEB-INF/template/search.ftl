@@ -13,10 +13,7 @@
 
             <div class="banner" id="banner">
 
-                <form action="" method="post">
-                    <input type="button" value="Login">
-                    <input type="button" value="Signup">
-                </form>
+               
 
             </div>
 

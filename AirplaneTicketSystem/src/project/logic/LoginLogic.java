@@ -91,9 +91,9 @@ public class LoginLogic {
 		
 		List<Flights> lf = new ArrayList<>();
 		String query = "select * from flights where " +
-				"where airportDES = (select airportid from airport where citytag = \"" + des + "\" and " +
-				"airportDEP = (select airportid from airport where citytag =\"" + dep + "\" and " +
-				"INSTR(departureTime, \""  + date +  "\")";
+				"airportDES = (select airportid from airport where citytag = \"" + des + "\") and " +
+				"airportDEP = (select airportid from airport where citytag =\"" + dep + "\") and " +
+				"INSTR(departureTime, \""  + date +  "\");";
 		
 		
 		
@@ -108,7 +108,7 @@ public class LoginLogic {
 					//create new flight object rs.getString(1) = id
 					//rs.getDate(7) = departure date
 					//rs.getInt(5) - rs.getInt(6) = ttlseats - bookedseats == available seats
-					Flights f = new Flights(rs.getString(1), rs.getDate(7), rs.getInt(5) - rs.getInt(6));
+					Flights f = new Flights(rs.getString(1), rs.getString(7), rs.getInt(5) - rs.getInt(6), rs.getString(9));
 					lf.add(f);
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -201,8 +201,8 @@ public class LoginLogic {
 		db.connect();
 		int i = db.create(query);
 		db.disconnect();
-		if(i > 0) {
-		
+		if(i > 0) 
+		{
 		return true;
 		}
 		else return false;
@@ -214,13 +214,10 @@ public class LoginLogic {
 		"uid = \"" + uid + "\";";
 		ResultSet rs = null;
 		db.connect();
-		
-		
 		List<Booking> lb = new ArrayList<>();
-		
 		rs = db.retrieve(query);
 		while(rs.next()) {
-			Booking b = new Booking(rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5));
+			Booking b = new Booking(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
 			lb.add(b);
 		}
 		
@@ -256,10 +253,7 @@ public class LoginLogic {
 	public boolean updateSeatCount(int seatsbought, int flightid) throws SQLException
 	{
 		//mfw I realize I have to update seat count probably at some point
-		//mfw I am making this way harder than it needs to be 
-		//this function needs to pull seat count though at some point.
-		//maybe create another function to pull seatcount
-		//yeah that makes more sense I'm gonna do that
+		
 		
 		return true;
 	}
@@ -287,9 +281,23 @@ public class LoginLogic {
 		return myAirportList;					
 	}
 	
-	public int getAirportid(String des) {
-		return 0;
+	public int getAirportid(String airportname) {
 		//TODO function to get an airport id realized I needed this function to clean code :') feels bad man
+		int airportid = -1;
+		
+		db.connect();
+		String query = "select airportid from airport where citytag = \"" + airportname + "\"";
+		ResultSet rs = null;
+		rs = db.retrieve(query);
+		try {
+			airportid = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		db.disconnect();
+		return airportid;
+		
 		
 	}
 	
@@ -303,6 +311,11 @@ public class LoginLogic {
 		
 		
 		return 0;
+	}
+	
+	public List<Flights> getNonDirectFlights(){
+		return null;
+		
 	}
 	
 	
