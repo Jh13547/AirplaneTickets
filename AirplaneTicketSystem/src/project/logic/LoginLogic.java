@@ -146,7 +146,7 @@ public class LoginLogic {
 	public boolean createCompany(Companies c) {
 		//this is an easier function DONE
 		String query = "INSERT INTO PLANECOMP(COMPNAME) VALUES ( \"" + c.getCompName() + "\" );";
-		
+		System.out.println(query);
 		db.connect();
 		int i = db.create(query);
 		
@@ -158,6 +158,7 @@ public class LoginLogic {
 		}
 		else return false;
 	}
+	
 	public boolean createBooking(Booking b) {
 		//Insert a booking query returns same values as every other create I make unfortunately
 		//this isn't exciting stuff
@@ -175,6 +176,7 @@ public class LoginLogic {
 		
 		else return false;
 	}
+	
 	public boolean createAirport(Airport a) {
 		//DONE
 		String query = "Insert into airport(citytag, statetag, countrytag) values " +
@@ -189,6 +191,7 @@ public class LoginLogic {
 		}
 		else return false;
 	}
+	
 	public List<Booking> getBookings(String uid) throws SQLException{
 		//DONE
 		
@@ -233,7 +236,7 @@ public class LoginLogic {
 		return complist;
 		
 	}
-	
+
 	
 	
 	
