@@ -55,12 +55,13 @@ public class BannerServlet extends HttpServlet {
 					String id=LoginLogic.login(request.getParameter("email"),request.getParameter("pass"));
 					System.out.println("found id="+id);
 					String[] names=LoginLogic.getFirstLast(id);
+					boolean admin = LoginLogic.isAdmin(id);
 					//if user was found/not found
 					if(id==null) {
 						reply="fail";
 						System.out.println("login not found");
 					}else{
-						session.setAttribute("user",new User(id,names[0],names[1],email,pass));
+						session.setAttribute("user",new User(id,names[0],names[1],email,pass,admin));
 						reply="success";
 						System.out.println("login Sucessful id="+id);
 					}
@@ -77,7 +78,7 @@ public class BannerServlet extends HttpServlet {
 			}else if(request.getParameter("action").equals("signup")) {
 				String first = request.getParameter("first");
 				String last = request.getParameter("last");
-				User user = new User(first, last, email, pass);
+				User user = new User(first, last, email, pass,false);
 				if(LoginLogic.signUp(user)) {
 					System.out.println("signup=Success");
 					session.setAttribute("user", user);
@@ -94,14 +95,17 @@ public class BannerServlet extends HttpServlet {
 			//if template isn't null then respond with the template requested template
 			else if(action.equals("template")){
 				String template=request.getParameter("template");
-				System.out.println("in "+template);
 				try{
 					
 					if(template.equals("index")) {
 						cfg.getTemplate("banner.ftl").process(root,response.getWriter());
 						cfg.getTemplate("index.ftl").process(root,response.getWriter());
 						cfg.getTemplate("footer.ftl").process(root,response.getWriter());
+					}else if(template.equals("admin")) {
+						cfg.getTemplate("admin.ftl").process(root,response.getWriter());
 					}else{
+						if(template.equals("AccountTab")&&((User)session.getAttribute("user")).getAdmin())
+							template+="Admin";
 						reply=cfg.getTemplate(template+".ftl").toString();
 						System.out.println("Requested '"+template+".ftl'");
 					}

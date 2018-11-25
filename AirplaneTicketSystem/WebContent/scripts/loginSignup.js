@@ -145,8 +145,11 @@ function login(){
 }
 
 function loginBook(){
-	console.log("loginbook func "+login());
-	if(login()=="success"){
+
+	var l=login();
+	consoe.log(login());
+	if(login()){
+
 		console.log("LOGINBOOK: logged in");
 		$('#bookform').submit();
 		

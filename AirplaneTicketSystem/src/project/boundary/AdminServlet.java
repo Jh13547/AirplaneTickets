@@ -148,7 +148,13 @@ public class AdminServlet extends HttpServlet {
 	{
 		LoginLogic ll = new LoginLogic();
 		Flights newFlight = new Flights(dept, dest, company, seats, destdate, deptdate );
-		boolean created = ll.createFlight(newFlight);
+		boolean created=false;
+		try {
+			created = ll.createFlight(newFlight);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return created;
 	}
 
