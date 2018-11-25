@@ -187,41 +187,77 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				if(u == null){
 					String flightid = request.getParameter("idbutton");
 					String amount = request.getParameter("pricevalue");
-					
-					root.put(flightid, "flightid");
-					root.put(amount, "amount");
+					root.put("flightid", flightid);
+					root.put("amount", amount);
+			
 					templateName = "loginnow.ftl";
 					cfg.getTemplate(templateName).process(root, out);
-					cfg.getTemplate("login.ftl").process(root, out);
+					cfg.getTemplate("loginbook.ftl").process(root, out);
+					
+					
+					
 				}
+				
+				//
 				else {
 				//out = response.getWriter();
 				templateName = "bookingconf.ftl";
 				LoginLogic ll = new LoginLogic();
-				
 				System.out.println(u.getEmail());
-				
 				String userid = u.id().toString();
-				
 				String flightid = request.getParameter("idbutton");
-				
 				String amount = request.getParameter("pricevalue");
-				Booking b = new Booking(userid, flightid, amount);
+				String seats = request.getParameter("seatsreq");
+				int seatsno = Integer.parseInt(seats);
+				int flightamount = Integer.parseInt(amount);
+				int ttl = seatsno * flightamount;
+				System.out.println("seat total " + seatsno);
+				System.out.println("flight amount: " + flightamount);
+				
+				
+				String ttlamount = ttl + "";
+				
+				
+				
+				
+				Booking b = new Booking(userid, flightid, ttlamount);
 				ll.createBooking(b);
-				
-				
 				String useremail = u.getEmail();
-				
-				root.put(useremail, "uemail");
-				
+				root.put("uemail", useremail);
+				System.out.println("I AM HERE THIS IS WHERE THIS PROJECT EXISTS " + useremail);
 				Template temp = cfg.getTemplate(templateName);
 				temp.process(root, out);
+				
+				
 				
 				}
 			}
 			catch(Exception e) {
 				
 			}
+		}
+		if(request.getParameter("relogamount") != null) {
+			User u =(User) session.getAttribute("user");
+			String amount = request.getParameter("relogamount");
+			String flightid = request.getParameter("relogflightid");
+			templateName = "bookingconf.ftl";
+			LoginLogic ll = new LoginLogic();
+			System.out.println(u.getEmail());
+			String userid = u.id().toString();
+		
+			Booking b = new Booking(userid, flightid, amount);
+			ll.createBooking(b);
+			String useremail = u.getEmail();
+			root.put("uemail", useremail);
+			System.out.println("I AM HERE THIS IS WHERE THIS PROJECT EXISTS " + useremail);
+			Template temp = cfg.getTemplate(templateName);
+			try {
+				temp.process(root, out);
+			} catch (TemplateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	
 		//need to add the right stuff but this generates the search page correctly
@@ -265,6 +301,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	}
 		
 }
+	private int valueof(String seats) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
 	//end of method stub
 	
 

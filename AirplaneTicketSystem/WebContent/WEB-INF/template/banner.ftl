@@ -10,13 +10,11 @@ It needs an if statement to change it if the user is already logged in by checki
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="styles/main.css"/>
-		<link rel="stylesheet" type="text/css" media="screen" href="styles/jquery-ui.css"/>
+		<link rel="stylesheet" href="styles/search.css"/>
 		<title>A Real Ticket Service, not a Project</title>
 		<script src="scripts/jquery.js"></script>
-    	<script src="scripts/jquery-ui.js"></script>
-    	<script src="scripts/home.js"></script>
-		<script src="scripts/loginSignup.js"></script>
 		<script src="scripts/banner.js"></script>
+		<script src="scripts/loginSignup.js"></script>
 	</head>
 	<div class="bg"></div>
 	<body>
