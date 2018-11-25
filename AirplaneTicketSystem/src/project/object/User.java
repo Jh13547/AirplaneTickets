@@ -24,6 +24,7 @@ public class User {
 	public String id() {
 		return id;
 	}
+	
 	public String getFirstName() {
 		return firstName;
 	}

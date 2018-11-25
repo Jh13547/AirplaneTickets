@@ -167,9 +167,6 @@ public class LoginLogic {
 		
 		db.connect();
 		int i = db.create(query);
-		
-		
-		
 		db.disconnect();
 		if(i > 0) {
 		return true;
@@ -253,9 +250,26 @@ public class LoginLogic {
 	public boolean updateSeatCount(int seatsbought, int flightid) throws SQLException
 	{
 		//mfw I realize I have to update seat count probably at some point
+		int j = -1;
+		db.connect();
+		String query = "select ttlseatsbooked from flights where flightid = \"" + flightid + "\"";
+		ResultSet rs = null;
+		rs = db.retrieve(query);
+		int i = -1;
+		while(rs.next()) {
+			i = rs.getInt(1);
+		}
+		i += seatsbought;
+		query = "update flights set ttlseatsbooked = " + i + " where flightid = " + flightid + ";";
+		j = db.update(query);
 		
+		db.disconnect();
 		
-		return true;
+		if(j == 1) {
+			return true;
+		}
+		
+		else return false;
 	}
 	
 	
@@ -300,23 +314,8 @@ public class LoginLogic {
 		
 		
 	}
+
 	
-	
-	
-	public int getSeatCount(int flightid) {
-		//TODO function to get seat count to help with other functions otherwise it becomes a pain to deal with 
-		//also could be used to do other things in the view that looks cool ie show sold out flights, keep track of 
-		//flights that aren't sold idk this class is getting kinda wild, not hard just wild]
-		
-		
-		
-		return 0;
-	}
-	
-	public List<Flights> getNonDirectFlights(){
-		return null;
-		
-	}
 	
 	
 }
