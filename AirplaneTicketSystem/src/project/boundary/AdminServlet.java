@@ -116,7 +116,12 @@ public class AdminServlet extends HttpServlet {
 			String deptdate = request.getParameter("deptdate").toString();
 			String destdate = request.getParameter("destdate").toString();
 			
-			boolean createNewFlight = AddNewFlight(request, response, dept, dest, company, seats, destdate, deptdate);
+			try {
+				boolean createNewFlight = AddNewFlight(request, response, dept, dest, company, seats, destdate, deptdate);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		if(request.getParameter("status").equals("AddNewAirport"))
@@ -139,7 +144,7 @@ public class AdminServlet extends HttpServlet {
 	}
 
 	private boolean AddNewFlight(HttpServletRequest request, HttpServletResponse response, String dept, String dest,
-			String company, int seats, String destdate, String deptdate) 
+			String company, int seats, String destdate, String deptdate) throws SQLException 
 	{
 		LoginLogic ll = new LoginLogic();
 		Flights newFlight = new Flights(dept, dest, company, seats, destdate, deptdate );

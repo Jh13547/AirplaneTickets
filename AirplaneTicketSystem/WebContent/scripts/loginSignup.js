@@ -134,10 +134,10 @@ function login(){
 					passError.innerHTML="!!User found!! or found a session";
 					passError.style.color="green";
 					sessionCheck();
-					return true;
+					return text;
 				}else{
 					passError.innerHTML="Login credentials not found";
-					return false;
+					return text;
 				}
 			}
 		});
@@ -145,9 +145,10 @@ function login(){
 }
 
 function loginBook(){
-	
-	if(login()){
+	console.log("loginbook func "+login());
+	if(login()=="success"){
 		console.log("LOGINBOOK: logged in");
+		$('#bookform').submit();
 		
 	}else{
 		console.log("LOGINBOOK: not logged in");

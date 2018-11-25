@@ -11,25 +11,6 @@ div
     display: block;
 }
 
-.banner
-{
-    padding-right: 1em;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.bg
-{
-    background-image: url(plane.jpg);
-    height: 100%;
-    position: relative;
-    opacity: 0.65;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: block;
-}
-
 .searchCriteria
 {
     padding-bottom: 1em;
@@ -41,13 +22,22 @@ div
     text-align: center;
 }
 
-.searchResults
+.searchResults 
 {
     position: absolute;
     height: 100%;
     width: 68%;
     left: 28%;
-    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+.results
+{
+	background-color: white;
+	margin: auto;
+	border: 1px solid black;
+	width: 50%;
+	padding: 5px, 0;
 }
 
 #returnDateEffect
