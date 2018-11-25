@@ -14,8 +14,6 @@
                       <#list airlines as airline>
   								<option value="${airline}">${airline}</option>
   						</#list></td></tr>
-                    <tr><td><label for="">Direct flight?</label></td> <td><input type="checkbox" name="directFlight" id="directFlight">
-                    </td></tr>
                    <tr><td> <input type="submit" name="flSearch" value="Search"></td></tr>
                    
                    </table>
@@ -24,24 +22,40 @@
             </div>
 
             <div class="searchResults" id="searchResults">
-            <#list flights as Flights>
-            <form action="FlightSearchLogin" method="post">	
+           
+				<#list flights as Flights>
+				
+				 <form action="FlightSearchLogin" class="results" method="post">
 						<table>
 							<tr>
-								<td>${Flights.id}</td>
-								<td>${Flights.date}</td>
-								<td>${Flights.price}</td>
+								<th>Flight Date</th>
+								<th>Flight Cost</th>
+								<th>Seats Requested</th>
 								
-							</tr>
+							
+							
 							<tr>
+						
+							<tr>
+								
+								<td>${Flights.departureDate}</td>
+								<td>$${Flights.price}</td>
+								
+							
+								<td><input type="number" name="seatsreq"></td>
 								<td colspan="2">
 								<input type="hidden" value="${Flights.id}" name="idbutton">
 								<input type="hidden" value="${Flights.price}" name="pricevalue">
+								
 								<input type="submit" name="buyBooking" value="Buy Now"></td>
+								
 							</tr>
 						</table>
 				</form>
 				</#list>
             </div>
+          
 
         </div>
+</body>
+</html>

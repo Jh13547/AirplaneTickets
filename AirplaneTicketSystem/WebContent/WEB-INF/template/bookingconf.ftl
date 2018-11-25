@@ -2,6 +2,6 @@
 <head>
 </head>
 <body>
-<h1>Congratulations your princess is in another castle, book another flight to continue</h1>
+<h1>${uemail}, your booking has been confirmed</h1>
 </body>
 </html>

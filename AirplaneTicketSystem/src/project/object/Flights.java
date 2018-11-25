@@ -78,6 +78,9 @@ public class Flights {
 	public String getDepartureDate() {
 		return departureDate;
 	}
+	public String getPrice() {
+		return price;
+	}
 
 	public void setTicketsavialable(int ticketsavialable) {
 		this.ticketsavialable = ticketsavialable;
