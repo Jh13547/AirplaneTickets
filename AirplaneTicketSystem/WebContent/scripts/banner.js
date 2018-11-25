@@ -22,10 +22,19 @@ function sessionCheck(){
 				console.log("did not find session");
 				$("#loginbtn").css('display','block');
 				$("#signupbtn").css('display','block');
+				$("#accounttabbtn").css('display','none');
+				$("#bannerPopup").css('display','none');
+				$("#bannerPopupBG").css('display','none');
+				return false;
 			}else{
 				//show account button for account popup
 				console.log("session found="+text);
 				$("#accounttabbtn").css('display','block');
+				$("#loginbtn").css('display','none');
+				$("#signupbtn").css('display','none');
+				$("#bannerPopup").css('display','none');
+				$("#bannerPopupBG").css('display','none');
+				return true;
 			}
 		}
 	});
@@ -78,6 +87,7 @@ function signOut(){
 		cache:false,
 		success:function(text){
 			console.log(text);
+			sessionCheck();
 		}
 	});
 }
