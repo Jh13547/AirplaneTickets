@@ -151,5 +151,6 @@ function addNewAirport()
 function exitAdminPage()
 {
     //puch ftl for a regualar page
-    alert('Leaving Admin Console');
+    //alert('Leaving Admin Console');
+	window.location.href ="index.html"
 }

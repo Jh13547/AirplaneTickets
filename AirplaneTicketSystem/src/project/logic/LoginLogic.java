@@ -66,14 +66,26 @@ public class LoginLogic {
 		return userID;
 		
 	}
-	
+	public boolean isAdmin(String id) {
+		boolean admin=false;
+		db.connect();
+		ResultSet rs = db.retrieve("select isadmin from login  where uid="+id+";");
+		try {
+			while(rs.next()) {
+				admin = rs.getBoolean(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();}
+		db.disconnect();
+		return admin;
+	}
 
 
 	public String[] getFirstLast(String id) {
 		//Returns a string array that contains the first and last name
 		String[] names = new String[2];
 		db.connect();
-		ResultSet rs = db.retrieve("Select firstname,lastname from login where uid='"+id+"';");
+		ResultSet rs = db.retrieve("Select firstname,lastname from login where uid="+id+";");
 		try {
 			rs.next();
 			names[0] = rs.getString("firstname");

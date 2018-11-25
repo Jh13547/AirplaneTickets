@@ -19,11 +19,11 @@ public class AccountInfoLogic {
 	DbAccessImpl db = new DbAccessImpl();
 	
 	public User getUserInfo(String id) {
-		User userInfo = null;
+		User userInfo = new User();
 		
 		//Returns a user with email, first name and last name
 		db.connect();
-		ResultSet rs = db.retrieve("Select firstname,lastname, uemail from login where uid='"+ id +"';");
+		ResultSet rs = db.retrieve("Select firstname,lastname, uemail from login where uid="+ id +";");
 		try {
 			while(rs.next()) {
 			userInfo.setFirstName(rs.getString("firstname"));
@@ -43,7 +43,7 @@ public class AccountInfoLogic {
 		ArrayList<Booking> bookinglist = new ArrayList<Booking>();
 		
 		db.connect();
-		ResultSet rs = db.retrieve("confnumber,flightid,AmountBooked where uid='"+ id +"';");
+		ResultSet rs = db.retrieve("Select confnumber,flightid,AmountBooked from bookedflights where uid="+ id +";");
 		try {
 			while(rs.next()) {
 			Booking booking = new Booking();
@@ -67,10 +67,10 @@ public class AccountInfoLogic {
 		
 		
 		db.connect();
-		ResultSet rs = db.retrieve("SELECTf f.flightid, a.citytag as Destination, a2.citytag as Departure\r\n" + 
-				"FROM flights f, airport a, airport a2\r\n" + 
-				"where f.airportDES = a.airportid\r\n" + 
-				"AND f.airportDEP = a2.airportid\r\n" + 
+		ResultSet rs = db.retrieve("SELECT f.flightid, a.citytag as Destination, a2.citytag as Departure " + 
+				"FROM flights f, airport a, airport a2 " + 
+				"where f.airportDES = a.airportid " + 
+				"AND f.airportDEP = a2.airportid " + 
 				"AND f.flightid ='"+ id +"';");
 		try {
 			while(rs.next()) {

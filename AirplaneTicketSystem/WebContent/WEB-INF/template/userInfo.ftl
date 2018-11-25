@@ -4,7 +4,7 @@
        
           <form>
             <label>Name</label>
-              ${user.firstname} ${user.lastname}
+              ${user.firstName} ${user.lastName}
               <br>
               <label> Email</label>
         		${user.email}

@@ -145,7 +145,8 @@ function login(){
 }
 
 function loginBook(){
-	
+	var l=login();
+	consoe.log(login());
 	if(login()){
 		console.log("LOGINBOOK: logged in");
 		

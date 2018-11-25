@@ -102,7 +102,7 @@ public class LoginServlet extends HttpServlet {
 				String uemail = request.getParameter("email");
 	
 				String upass = request.getParameter("pass");
-				User u = new User(firstname, lastname, uemail, upass);
+				User u = new User(firstname, lastname, uemail, upass,false);
 				LoginLogic log = new LoginLogic();
 				Boolean signedup = log.signUp(u);
 				if(signedup) {

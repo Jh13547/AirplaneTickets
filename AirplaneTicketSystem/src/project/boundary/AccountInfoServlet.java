@@ -97,7 +97,7 @@ public class AccountInfoServlet extends HttpServlet {
 		
 		User user=(User) session.getAttribute("user");
 		String id = user.id();
-		
+		System.out.println("id="+id);
 		out = response.getWriter();
 		
 		String bannerTemplate = "banner.ftl",footerTemplate="footer.ftl";
@@ -107,7 +107,7 @@ public class AccountInfoServlet extends HttpServlet {
 			e1.printStackTrace();
 		}
 		
-		if(request.getParameter("status").equals("GotoAccount")) {
+		if(request.getParameter("status").equals("My Account")) {
 			
 			try {
 				
@@ -124,7 +124,7 @@ public class AccountInfoServlet extends HttpServlet {
 			}
 		}
 		
-		if(request.getParameter("status").equals("GotoBookings")) {
+		if(request.getParameter("status").equals("My Bookings")) {
 			
 	try {
 				templateName = "bookingHistory.ftl";
