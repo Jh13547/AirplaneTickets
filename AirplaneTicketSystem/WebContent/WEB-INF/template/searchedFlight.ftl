@@ -24,8 +24,8 @@
             </div>
 
             <div class="searchResults" id="searchResults">
-            <form action="FlightSearchLogin" method="post">
-				<#list flights as Flights>
+            <#list flights as Flights>
+            <form action="FlightSearchLogin" method="post">	
 						<table>
 							<tr>
 								<td>${Flights.id}</td>
