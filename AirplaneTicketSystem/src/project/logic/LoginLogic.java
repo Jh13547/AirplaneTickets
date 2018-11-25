@@ -68,6 +68,7 @@ public class LoginLogic {
 	}
 	
 
+
 	public String[] getFirstLast(String id) {
 		//Returns a string array that contains the first and last name
 		String[] names = new String[2];
@@ -120,10 +121,8 @@ public class LoginLogic {
 			e.printStackTrace();
 		}
 		
-		db.disconnect();
-		//return list of flight objects here
-		return lf;
 		
+
 	}
 	//this thing is confusing and may or may not cause issues not sure yet. 
 	public boolean createFlight(Flights f) {
@@ -137,6 +136,7 @@ public class LoginLogic {
 		String query = "Insert into Flights(airportDes, airportDep, planeid, ttlseatsonplane, departureTime, arivalTime) values"
 				+ "\""+ destination + "\",  \"" + departure + "\" , \"" +  compid + "\" , \"" + f.ticketsavialable + "\" , \"" + f.departureDate + "\" , \"" + f.destinationDate + "\");";
 	
+
 		return true;
 	}
 	
@@ -170,7 +170,7 @@ public class LoginLogic {
 	public boolean createCompany(Companies c) {
 		//this is an easier function DONE
 		String query = "INSERT INTO PLANECOMP(COMPNAME) VALUES ( \"" + c.getCompName() + "\" );";
-		
+		System.out.println(query);
 		db.connect();
 		int i = db.create(query);
 		db.disconnect();
@@ -179,6 +179,7 @@ public class LoginLogic {
 		}
 		else return false;
 	}
+	
 	public boolean createBooking(Booking b) {
 		//Insert a booking query returns same values as every other create I make unfortunately
 		//this isn't exciting stuff
@@ -196,6 +197,7 @@ public class LoginLogic {
 		
 		else return false;
 	}
+	
 	public boolean createAirport(Airport a) {
 		//DONE
 		String query = "Insert into airport(citytag, statetag, countrytag) values " +
@@ -210,6 +212,7 @@ public class LoginLogic {
 		}
 		else return false;
 	}
+	
 	public List<Booking> getBookings(String uid) throws SQLException{
 		//DONE
 		
@@ -252,6 +255,7 @@ public class LoginLogic {
 		return complist;
 		
 	}
+
 	
 	public boolean updateSeatCount(int seatsbought, int flightid) throws SQLException
 	{
