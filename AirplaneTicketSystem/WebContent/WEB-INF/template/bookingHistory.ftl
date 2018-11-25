@@ -9,19 +9,19 @@
       
       <table>
       <tr>
-          <th> Date </th>
+          <th> Confirmation Number </th>
+          <th> Departure </th>
           <th> Destination </th>
           <th> Airline </th>
-          <th> Payment </th>
           </tr>
-           <#list bookings as b>
           <tr> 
-          <td> ${b.date} </td>
-          <td> ${b.destination}</td>
-          <td> ${b.airline}</td>
-          <td> ${b.payment}</td>
-          </tr>
+           <#list bookings as b>
+          <td> ${b.bookingid} </td>
+          <td> ${b.company}</td>
+          td> ${b.Departure}</td>
+          <td> ${b.Destination}</td>
           </#list>
+          </tr>
       </table>
   </body>
 </html>

@@ -55,7 +55,7 @@ function signup(){
 //email.onkeyup = emailCheck;
 //pass.onkeyup = passCheck;
 
-//Checks if valid email, using a regualr expression
+//Checks if valid email, using a regular expression
 function emailCheck(){
 	if(email.value==""){
 		emailError.innerHTML="The Email must be filled in";

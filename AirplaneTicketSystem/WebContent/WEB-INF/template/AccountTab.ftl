@@ -4,12 +4,12 @@
 	<table>
 		<tr>
 		<td>
-		<input id="accountbtn" type="button" value="My Account"  onclick="gotoAccount()">
+		<input id="accountbtn" type="button" value="My Account" name="accountinfo"  onclick="gotoAccount()">
 		</td>
 		</tr>
 		<tr>
 		<td>
-		<input id="bookingsbtn" type="button" value="My Bookings" onclick="gotoBookings()">
+		<input id="bookingsbtn" type="button" value="My Bookings" name="bookinghistory" onclick="gotoBookings()">
 		</td>
 		</tr>
 		<tr>

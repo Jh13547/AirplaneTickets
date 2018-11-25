@@ -220,7 +220,7 @@ public class LoginLogic {
 		
 		rs = db.retrieve(query);
 		while(rs.next()) {
-			Booking b = new Booking(rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5));
+			Booking b = new Booking(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
 			lb.add(b);
 		}
 		
