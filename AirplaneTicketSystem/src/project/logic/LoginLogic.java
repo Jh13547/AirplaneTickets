@@ -145,7 +145,7 @@ public class LoginLogic {
 		//DONE
 		
 		String getCompid = "select compid from planecomp " +
-							"where compane = \"" + p.getCompname() + "\";";
+							"where compname = \"" + p.getCompname() + "\";";
 		
 		db.connect();
 		int compid = 0;
