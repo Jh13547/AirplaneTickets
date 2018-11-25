@@ -72,7 +72,7 @@ public void init(ServletConfig config) throws ServletException {
 
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	System.out.println("Get method");
-	
+	System.out.println(request.getParameter("flSearch")+"hey");
 	
 			
 	HttpSession session = request.getSession();
@@ -111,15 +111,15 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				//idk this functionality might have to go 
 				String directFlight = request.getParameter("directFlight");		
 				
-//				
-//				System.out.println(destination);
-//				System.out.println(departure);
-//				System.out.println(date);
-//				System.out.println(airline);
-//				System.out.println(returnFlight);
-//				System.out.println(directFlight);
-//			
-//				
+				
+				System.out.println(destination);
+				System.out.println(departure);
+				System.out.println(date);
+				System.out.println(airline);
+				System.out.println(returnFlight);
+				System.out.println(directFlight);
+			
+				
 				
 				
 				

@@ -4,7 +4,7 @@ $(function ()
     // on load get a array of all destinations and departures
     
     // add autocomplete to both text boxes
-    var arr = ["Atlanta", "Dallas", "Houston", "New York"];
+    var arr = ["Atlanta", "Dallas", "Houston", "New York","Austin"];
     
     $('#dept').autocomplete ({
         source: arr

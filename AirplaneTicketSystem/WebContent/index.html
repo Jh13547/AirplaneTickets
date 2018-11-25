@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="styles/main.css"/>
-		<title>A Real Ticket Service, not a Project</title>
 		<script src="scripts/jquery.js"></script>
-		<script src="scripts/banner.js"></script>
-		<script src="scripts/loginSignup.js"></script>
 	</head>
 	
-	<body class="bg">
-	<div id="banner">
-		<input class="banner" id="loginbtn" value="Login" type="button" onclick="showLogin()">
-		<input class="banner" id="signupbtn" value="SignUp" type="button" onclick="showSignup()">
-		<input class="banner" id="accounttabbtn" value="My Account" type="button" onclick="showAccountTab()">
-		<div id="bannerPopupBG"></div>
-		<div id="bannerPopup">pop</div>
-	</div>
 	
+	 <form id="form"action="BannerServlet" method="post">
+	 	<input type="hidden"name="template"value="index">
+	 	<input type="hidden"name="action"value="template">
+	 </form>
 	
-	
-	</body>
-	
+	<script>
+		$(window).ready(function(){
+			$("#form").submit();
+			
+		});
+	</script>
 	
 	
 </html>
