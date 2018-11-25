@@ -183,10 +183,22 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		//handles new booking
 		if(request.getParameter("buyBooking") != null) {
 			try {
+				User u =(User) session.getAttribute("user");
+				if(u == null){
+					String flightid = request.getParameter("idbutton");
+					String amount = request.getParameter("pricevalue");
+					
+					root.put(flightid, "flightid");
+					root.put(amount, "amount");
+					templateName = "loginnow.ftl";
+					cfg.getTemplate(templateName).process(root, out);
+					cfg.getTemplate("login.ftl").process(root, out);
+				}
+				else {
 				//out = response.getWriter();
 				templateName = "bookingconf.ftl";
 				LoginLogic ll = new LoginLogic();
-				User u = (User) session.getAttribute("user");
+				
 				System.out.println(u.getEmail());
 				
 				String userid = u.id().toString();
@@ -198,10 +210,14 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				ll.createBooking(b);
 				
 				
+				String useremail = u.getEmail();
+				
+				root.put(useremail, "uemail");
+				
 				Template temp = cfg.getTemplate(templateName);
 				temp.process(root, out);
 				
-				
+				}
 			}
 			catch(Exception e) {
 				
@@ -210,42 +226,42 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	
 		//need to add the right stuff but this generates the search page correctly
 		//done
-		if(request.getParameter("tstButton") != null)
-		
-		{
-			
-			//creates a search template with airline options added
-			try 
-			{
-				//System.out.println("I'm here");
-					//out = response.getWriter();
-					templateName = "searchedFlight.ftl";
-					List <String> myComp = new ArrayList<>();
-					LoginLogic ll = new LoginLogic();
-				
-					myComp = ll.getCompanies();
-			
-			
-						root.put("airlines", myComp);
-						//Template temp = cfg.getTemplate(bannerTemplate);
-						//temp.process(root, out);
-						Template temp = cfg.getTemplate(templateName);
-						temp.process(root, out);
-						temp = cfg.getTemplate(footerTemplate);
-						temp.process(root, out);
-			
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-			}
-		
-		try {
-			cfg.getTemplate(footerTemplate).process(root, out);
-		} catch (TemplateException e1) {
-			e1.printStackTrace();
-		}
+//		if(request.getParameter("tstButton") != null)
+//		
+//		{
+//			
+//			//creates a search template with airline options added
+//			try 
+//			{
+//				//System.out.println("I'm here");
+//					//out = response.getWriter();
+//					templateName = "searchedFlight.ftl";
+//					List <String> myComp = new ArrayList<>();
+//					LoginLogic ll = new LoginLogic();
+//				
+//					myComp = ll.getCompanies();
+//			
+//			
+//						root.put("airlines", myComp);
+//						//Template temp = cfg.getTemplate(bannerTemplate);
+//						//temp.process(root, out);
+//						Template temp = cfg.getTemplate(templateName);
+//						temp.process(root, out);
+//						temp = cfg.getTemplate(footerTemplate);
+//						temp.process(root, out);
+//			
+//			}
+//			catch(Exception e) {
+//				e.printStackTrace();
+//			}
+//			
+//			}
+//		
+//		try {
+//			cfg.getTemplate(footerTemplate).process(root, out);
+//		} catch (TemplateException e1) {
+//			e1.printStackTrace();
+//		}
 	}
 		
 }
