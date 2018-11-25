@@ -130,6 +130,12 @@ public class LoginLogic {
 		//TODO create a function to insert a flight in database return if the create worked or not
 		//I'm just writting a function to get ids for this and planes b/c man
 		
+		int departure = getAirportId(f.departure);
+		int destination = getAirportId(f.destination);
+		int compid = getCompId(f.companyName);
+		
+		String query = "Insert into Flights(airportDes, airportDep, planeid, ttlseatsonplane, departureTime, arivalTime) values"
+				+ "\""+ destination + "\",  \"" + departure + "\" , \"" +  compid + "\" , \"" + f.ticketsavialable + "\" , \"" + f.departureDate + "\" , \"" + f.destinationDate + "\");";
 	
 		return true;
 	}
@@ -139,7 +145,7 @@ public class LoginLogic {
 		//DONE
 		
 		String getCompid = "select compid from planecomp " +
-							"where compane = \"" + p.getCompname() + "\";";
+							"where compname = \"" + p.getCompname() + "\";";
 		
 		db.connect();
 		int compid = 0;
@@ -313,6 +319,24 @@ public class LoginLogic {
 		return airportid;
 		
 		
+	}
+	
+	
+	public int getCompId(String name) {
+		String getCompid = "select compid from planecomp " +
+				"where compane = \"" + name + "\";";
+
+		db.connect();
+		int compid = 0;
+		ResultSet rs = null;
+		rs = db.retrieve(getCompid);
+		while(rs.next()) {
+				compid = rs.getInt(1);
+				
+		}
+		return compid;
+}
+
 	}
 
 	
