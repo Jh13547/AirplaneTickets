@@ -107,7 +107,7 @@ public class AccountInfoServlet extends HttpServlet {
 			e1.printStackTrace();
 		}
 		
-		if(request.getParameter("accountinfo") != null) {
+		if(request.getParameter("status").equals("GotoAccount")) {
 			
 			try {
 				
@@ -124,7 +124,7 @@ public class AccountInfoServlet extends HttpServlet {
 			}
 		}
 		
-		if(request.getParameter("bookinghistory") != null) {
+		if(request.getParameter("status").equals("GotoBookings")) {
 			
 	try {
 				templateName = "bookingHistory.ftl";
