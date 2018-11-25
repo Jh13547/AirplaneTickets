@@ -109,12 +109,8 @@ public class LoginLogic {
 				"INSTR(departureTime, \""  + date +  "\");";
 		
 		
-		
 		System.out.println(query);
-		ResultSet rs = null;
-		
-		System.out.println(query);
-		rs = db.retrieve(query);
+		ResultSet rs = db.retrieve(query);
 		try {
 			while(rs.next()) {
 				try {

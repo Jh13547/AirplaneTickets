@@ -22,7 +22,7 @@
 	                <label for="">Date:</label>
 	                </td>
 	                <td>
-	                <input type="text" name="date" id="date">
+	                <input type="date" name="date" id="date">
 	                </td>
 	            </tr>
 	            <tr>
