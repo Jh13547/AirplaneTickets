@@ -117,6 +117,7 @@ public class AdminServlet extends HttpServlet {
 			String destdate = request.getParameter("destdate").toString();
 			
 			boolean createNewFlight = AddNewFlight(request, response, dept, dest, company, seats, destdate, deptdate);
+			response.getWriter().write(""+createNewFlight);
 		}
 		
 		if(request.getParameter("status").equals("AddNewAirport"))
