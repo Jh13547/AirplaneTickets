@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -42,7 +43,6 @@ public class BannerServlet extends HttpServlet {
 		//if the request isn't for a template then it will try to login or signup
 		HttpSession session = request.getSession();
 		synchronized(session) {
-			
 			
 			//if logging in
 			if(request.getParameter("action").equals("login")) {
@@ -94,8 +94,14 @@ public class BannerServlet extends HttpServlet {
 			else if(action.equals("template")){
 				String template=request.getParameter("template");
 				try{
-					reply=cfg.getTemplate(template+".ftl").toString();
-					System.out.println("Requested '"+template+".ftl'");
+					if(template.equals("index")) {
+						cfg.getTemplate("banner.ftl").process(new HashMap(),response.getWriter());
+						cfg.getTemplate("index.ftl").process(new HashMap(),response.getWriter());
+						cfg.getTemplate("footer.ftl").process(new HashMap(),response.getWriter());
+					}else {
+						reply=cfg.getTemplate(template+".ftl").toString();
+						System.out.println("Requested '"+template+".ftl'");
+					}
 				}catch(Exception e) {
 					reply="fail";
 				}
@@ -119,10 +125,14 @@ public class BannerServlet extends HttpServlet {
 			}else if(action.equals("signout")) {
 				if (session != null) 
 				    session.invalidate();
-				///////////////////////need to refresh the page to the home screen, so if they're on they're accoutn page it will leave it.
+				///////////////////////need to refresh the page to the home screen, so if they're on they're account page it will leave it.
 				reply="session invalidated";
 			}
 		}
+		if(request.getParameter("template")!=null) {
+			if(!request.getParameter("template").equals("index"))
+				response.getWriter().write(reply);
+		}else
 		response.getWriter().write(reply);
 	}
 
