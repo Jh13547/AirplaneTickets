@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import project.logic.AccountInfoLogic;
 import project.logic.LoginLogic;
@@ -95,6 +97,16 @@ public class AccountInfoServlet extends HttpServlet {
 		
 		User user=(User) session.getAttribute("user");
 		String id = user.id();
+		
+		out = response.getWriter();
+		
+		String bannerTemplate = "banner.ftl",footerTemplate="footer.ftl";
+		try {
+			cfg.getTemplate(bannerTemplate).process(root, out);
+		} catch (TemplateException e1) {
+			e1.printStackTrace();
+		}
+		
 		if(request.getParameter("accountinfo") != null) {
 			
 			try {
@@ -104,6 +116,8 @@ public class AccountInfoServlet extends HttpServlet {
 				AccountInfoLogic log = new AccountInfoLogic();
 				User u = log.getUserInfo(id);
 				root.put("user", u);
+				Template temp = cfg.getTemplate(templateName);
+				temp.process(root, out);
 			}
 			catch(Exception e) {
 				e.printStackTrace();
@@ -126,11 +140,20 @@ public class AccountInfoServlet extends HttpServlet {
 					book.setCompany(company);
 				}
 				root.put("bookings", bookingList);
+				Template temp = cfg.getTemplate(templateName);
+				temp.process(root, out);
 			}
 			catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
+		
+		try {
+			cfg.getTemplate(footerTemplate).process(root, out);
+		} catch (TemplateException e1) {
+			e1.printStackTrace();
+		}
+		
 		}
 	}
 	/**

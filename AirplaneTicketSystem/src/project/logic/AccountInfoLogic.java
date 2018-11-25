@@ -25,10 +25,11 @@ public class AccountInfoLogic {
 		db.connect();
 		ResultSet rs = db.retrieve("Select firstname,lastname, uemail from login where uid='"+ id +"';");
 		try {
-			rs.next();
+			while(rs.next()) {
 			userInfo.setFirstName(rs.getString("firstname"));
 			userInfo.setLastName(rs.getString("lastname"));
 			userInfo.setEmail(rs.getString("uemail"));
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("UID might not exist");
@@ -59,11 +60,12 @@ public class AccountInfoLogic {
 		return bookinglist;
 	}
 	
+	//Returns a destination and departure locations from flight id
 	public String[] getFlightInfo(String id) {
 		
 		String[] flightInfo = new String[3];
 		
-		//Returns a destination and departure locations from flight id
+		
 		db.connect();
 		ResultSet rs = db.retrieve("SELECTf f.flightid, a.citytag as Destination, a2.citytag as Departure\r\n" + 
 				"FROM flights f, airport a, airport a2\r\n" + 
@@ -71,10 +73,11 @@ public class AccountInfoLogic {
 				"AND f.airportDEP = a2.airportid\r\n" + 
 				"AND f.flightid ='"+ id +"';");
 		try {
-			rs.next();
+			while(rs.next()) {
 			flightInfo[0] = rs.getString("Departure");
 			flightInfo[1] = rs.getString("Destination");
 			flightInfo[2] = rs.getString("flightid");
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("UID might not exist");
@@ -83,19 +86,21 @@ public class AccountInfoLogic {
 		return flightInfo;
 	}
 	
+	//Returns a company from flight id
 	public String getCompany(String id) {
 	String comp = null;
-
-	//Returns a company from flight id
 	db.connect();
+	
 	ResultSet rs = db.retrieve("SELECT f.planeid,f.flightid, c.compname\r\n" + 
 			"FROM flights f, planecomp c, planes p\r\n" + 
 			"where f.planeid= p.planeid\r\n" + 
 			"AND c.compid = p.compid\r\n" + 
 			"AND f.flightid ='"+ id +"';");
 	try {
-		rs.next();
+		
+		while(rs.next()) {
 		 comp = rs.getString("compname");
+		}
 	}catch(SQLException e) {
 		e.printStackTrace();
 		System.out.println("FlightId might not exist");
