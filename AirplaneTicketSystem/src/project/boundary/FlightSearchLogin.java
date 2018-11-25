@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import project.logic.LoginLogic;
 import project.object.Booking;
@@ -81,9 +82,14 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	Writer out;
 	String templateName;
 	Map<String, Object> root = new HashMap<>();
+	out = response.getWriter();
 	
-	String bannerTemplate = "banner.ftl";
-	
+	String bannerTemplate = "banner.ftl",footerTemplate="footer.ftl";
+	try {
+		cfg.getTemplate(bannerTemplate).process(root, out);
+	} catch (TemplateException e1) {
+		e1.printStackTrace();
+	}
 	
 	
 		//flight search stuff 
@@ -138,9 +144,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					
 					myComp = ll.getCompanies();
 					root.put("airlines", myComp);
-					Template temp = cfg.getTemplate(bannerTemplate);
-					temp.process(root, out);
-					temp = cfg.getTemplate(templateName);
+					//Template temp = cfg.getTemplate(bannerTemplate);
+					//temp.process(root, out);
+					Template temp = cfg.getTemplate(templateName);
 					temp.process(root, out);
 				}
 //				else if(returnFlight.equals("on") && directFlight.equals("off")) {
@@ -162,9 +168,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					root.put("flights", lf);
 					myComp = ll.getCompanies();
 					root.put("airlines", myComp);
-					Template temp = cfg.getTemplate(bannerTemplate);
-					temp.process(root, out);
-					temp = cfg.getTemplate(templateName);
+					//Template temp = cfg.getTemplate(bannerTemplate);
+					//temp.process(root, out);
+					Template temp = cfg.getTemplate(templateName);
 					temp.process(root, out);
 				
 					
@@ -183,7 +189,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		//handles new booking
 		if(request.getParameter("buyBooking") != null) {
 			try {
-				out = response.getWriter();
+				//out = response.getWriter();
 				templateName = "bookingconf.ftl";
 				LoginLogic ll = new LoginLogic();
 				User u = (User) session.getAttribute("user");
@@ -218,7 +224,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			try 
 			{
 				//System.out.println("I'm here");
-					out = response.getWriter();
+					//out = response.getWriter();
 					templateName = "searchedFlight.ftl";
 					List <String> myComp = new ArrayList<>();
 					LoginLogic ll = new LoginLogic();
@@ -227,9 +233,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			
 			
 						root.put("airlines", myComp);
-						Template temp = cfg.getTemplate(bannerTemplate);
+						//Template temp = cfg.getTemplate(bannerTemplate);
+						//temp.process(root, out);
+						Template temp = cfg.getTemplate(templateName);
 						temp.process(root, out);
-						temp = cfg.getTemplate(templateName);
+						temp = cfg.getTemplate(footerTemplate);
 						temp.process(root, out);
 			
 			}
@@ -237,7 +245,13 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				e.printStackTrace();
 			}
 			
-			}	
+			}
+		
+		try {
+			cfg.getTemplate(footerTemplate).process(root, out);
+		} catch (TemplateException e1) {
+			e1.printStackTrace();
+		}
 	}
 		
 }

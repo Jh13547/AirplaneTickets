@@ -5,6 +5,7 @@ $(document).ready(function(){
 	$("#bannerPopupBG").click(function(){
 		$("#bannerPopup").css('display','none');
 		$("#bannerPopupBG").css('display','none');
+		console.log("hide");
 	});
 	
 	//Seeing if there is a session already and show/hide the proper buttons

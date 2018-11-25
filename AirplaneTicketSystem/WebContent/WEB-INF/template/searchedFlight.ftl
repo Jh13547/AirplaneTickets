@@ -45,5 +45,3 @@
             </div>
 
         </div>
-</body>
-</html>
