@@ -134,14 +134,28 @@ function login(){
 					passError.innerHTML="!!User found!! or found a session";
 					passError.style.color="green";
 					sessionCheck();
-				}else
+					return true;
+				}else{
 					passError.innerHTML="Login credentials not found";
-				
+					return false;
+				}
 			}
 		});
 	}
 }
 
+function loginBook(){
+	
+	if(login()){
+		console.log("LOGINBOOK: logged in");
+		
+	}else{
+		console.log("LOGINBOOK: not logged in");
+		
+	}
+	
+	
+}
 //When a key is released and one of the inputs are focused
 //email.onkeyup = emailCheck;
 //pass.onkeyup = passCheck;
