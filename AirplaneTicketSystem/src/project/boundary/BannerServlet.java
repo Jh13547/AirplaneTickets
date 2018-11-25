@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -27,7 +28,7 @@ public class BannerServlet extends HttpServlet {
 	Configuration cfg;
 	String templateDir = "/WEB-INF/template";
 	LoginLogic LoginLogic=new LoginLogic();
-
+	Map root = new HashMap();
     public BannerServlet() {
         super();}
     
@@ -93,12 +94,14 @@ public class BannerServlet extends HttpServlet {
 			//if template isn't null then respond with the template requested template
 			else if(action.equals("template")){
 				String template=request.getParameter("template");
+				System.out.println("in "+template);
 				try{
+					
 					if(template.equals("index")) {
-						cfg.getTemplate("banner.ftl").process(new HashMap(),response.getWriter());
-						cfg.getTemplate("index.ftl").process(new HashMap(),response.getWriter());
-						cfg.getTemplate("footer.ftl").process(new HashMap(),response.getWriter());
-					}else {
+						cfg.getTemplate("banner.ftl").process(root,response.getWriter());
+						cfg.getTemplate("index.ftl").process(root,response.getWriter());
+						cfg.getTemplate("footer.ftl").process(root,response.getWriter());
+					}else{
 						reply=cfg.getTemplate(template+".ftl").toString();
 						System.out.println("Requested '"+template+".ftl'");
 					}
