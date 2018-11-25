@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Search</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="styles/search.css" />
-    <script src="scripts/search.js"></script>
-</head>
-<body>
-        <div class="bg">
-
-            <div class="banner" id="banner">
-
-                <form action="" method="post">
-                    <input type="button" value="Login">
-                    <input type="button" value="Signup">
-                </form>
-
-            </div>
-
-            <div class="searchCriteria" id="searchCri">
+<div class="searchCriteria" id="searchCri">
 
                 <h2>Search Criteria</h2>
 
@@ -46,18 +24,24 @@
             </div>
 
             <div class="searchResults" id="searchResults">
-				<#list flights as flight>
+            <#list flights as Flights>
+            <form action="FlightSearchLogin" method="post">	
 						<table>
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td>${Flights.id}</td>
+								<td>${Flights.date}</td>
+								<td>${Flights.price}</td>
+								
 							</tr>
-						
+							<tr>
+								<td colspan="2">
+								<input type="hidden" value="${Flights.id}" name="idbutton">
+								<input type="hidden" value="${Flights.price}" name="pricevalue">
+								<input type="submit" name="buyBooking" value="Buy Now"></td>
+							</tr>
 						</table>
+				</form>
 				</#list>
             </div>
 
         </div>
-</body>
-</html>

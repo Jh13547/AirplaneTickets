@@ -20,8 +20,10 @@ import javax.servlet.http.HttpSession;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import project.logic.LoginLogic;
+import project.object.Booking;
 import project.object.Flights;
 import project.object.User;
 
@@ -50,17 +52,7 @@ public void init(ServletConfig config) throws ServletException {
 	// TODO Auto-generated method stub
 	
 	super.init(config);
-	
-	
-	// TODO Auto-generated method stub
-	// Create your Configuration instance, and specify if up to what FreeMarker
-	// version (here 2.3.27) do you want to apply the fixes that are not 100%
-	// backward-compatible. See the Configuration JavaDoc for details.
 	cfg = new Configuration(Configuration.VERSION_2_3_28);
-
-	// Specify the source where the template files come from. Here I set a
-	// plain directory for it, but non-file-system sources are possible too:
-	
 		File file = new File(getServletContext().getRealPath(tempDir));
 		try {
 			cfg.setDirectoryForTemplateLoading(file);
@@ -68,19 +60,9 @@ public void init(ServletConfig config) throws ServletException {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-	// Set the preferred charset template files are stored in. UTF-8 is
-	// a good choice in most applications:
 	cfg.setDefaultEncoding("UTF-8");
-
-	// Sets how errors will appear.
-	// During web page *development* TemplateExceptionHandler.HTML_DEBUG_HANDLER is better.
 	cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-
-	// Don't log exceptions inside FreeMarker that it will thrown at you anyway:
 	cfg.setLogTemplateExceptions(false);
-
-	// Wrap unchecked exceptions thrown during template processing into TemplateException-s.
 	cfg.setWrapUncheckedExceptions(true);
 }
 
@@ -90,33 +72,22 @@ public void init(ServletConfig config) throws ServletException {
 
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	System.out.println("Get method");
-	//response.getWriter().append("Served at: ").append(request.getContextPath());
-	// TODO attach logic to handle web pages
 	
 	
-		//servlet handling for signup page code works don't touch me should be an example for how the logic is set up to be handled
-//		if(request.getParameter("signup") != null) {
-//			String firstname = request.getParameter("first");
-//			String lastname = request.getParameter("last");
-//			String uemail = request.getParameter("email");
-//
-//			String upass = request.getParameter("pass");
-//			User u = new User(firstname, lastname, uemail, upass);
-//			LoginLogic log = new LoginLogic();
-//			Boolean signedup = log.signUp(u);
-//			if(signedup) {
-//				System.out.println("Success");
-//			}
-//			else
-//				System.out.println("Failure");
-//		}
-	
-			//System.out.println(request.getParameter("flSearch"));
 			
-	
+	HttpSession session = request.getSession();
+	synchronized(session) {
 	Writer out;
 	String templateName;
 	Map<String, Object> root = new HashMap<>();
+	out = response.getWriter();
+	
+	String bannerTemplate = "banner.ftl",footerTemplate="footer.ftl";
+	try {
+		cfg.getTemplate(bannerTemplate).process(root, out);
+	} catch (TemplateException e1) {
+		e1.printStackTrace();
+	}
 	
 	
 		//flight search stuff 
@@ -128,62 +99,77 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		try {
 			
 			out = response.getWriter();
-			templateName = "search.ftl";
+			templateName = "searchedFlight.ftl";
 			List <String> myComp = new ArrayList<>();
 			LoginLogic ll = new LoginLogic();
-			
-			
 				String destination = request.getParameter("destination");
 				String departure = request.getParameter("departure");
 				String date = request.getParameter("date");
 				String airline = request.getParameter("AirlineOption");
-				
 				//maybe this functionality goes for now and can be saved for a later day. 
 				String returnFlight = request.getParameter("returnFlight");
-				
 				//idk this functionality might have to go 
-				String directFlight = request.getParameter("directFlight");
+				String directFlight = request.getParameter("directFlight");		
 				
-				
-//				idk ignore this stuff it's just verification of the information being pulled
+//				
 //				System.out.println(destination);
 //				System.out.println(departure);
 //				System.out.println(date);
 //				System.out.println(airline);
 //				System.out.println(returnFlight);
 //				System.out.println(directFlight);
-				
-				root.put("des", destination);
-				root.put("dep", departure);
-				root.put("date", date);
-				root.put("airline", airline);
+//			
+//				
 				
 				
-				if(returnFlight.equals("on")) {
-					//if returnflight has been clicked do something here
-				}
-				if(directFlight.equals("on")) {
-					//if directFlight has been clicked do something here
+				
+				if(returnFlight != null) {
+					
+					
+					String returnDate = request.getParameter("returnDate");
+					root.put("des", destination);
+					root.put("dep", departure);
+					root.put("date", date);
+					root.put("airline", airline);						
 					List<Flights> lf = new ArrayList<>();
 					lf = ll.rtnFlightList(departure, destination, date);
-					
+					List<Flights> rf = new ArrayList<>();
+					rf = ll.rtnFlightList(destination, departure, returnDate);
 					root.put("flights", lf);
+					root.put("returnFlights", rf);
 					
 					
 					
+					myComp = ll.getCompanies();
+					root.put("airlines", myComp);
+					Template temp = cfg.getTemplate(templateName);
+					temp.process(root, out);
+				}
+//				else if(returnFlight.equals("on") && directFlight.equals("off")) {
+//					//if returnflight has been clicked do something here
+//					
+//					
+//					
+//					
+//				}
+				else{
+					//if directFlight has been clicked do something here
 					
-					
+					root.put("des", destination);
+					root.put("dep", departure);
+					root.put("date", date);
+					root.put("airline", airline);						
+					List<Flights> lf = new ArrayList<>();
+					lf = ll.rtnFlightList(departure, destination, date);
+					root.put("flights", lf);
+					myComp = ll.getCompanies();
+					root.put("airlines", myComp);
+					Template temp = cfg.getTemplate(templateName);
+					temp.process(root, out);
+				
 					
 				}
 				
-				
-				
-				
-				
-		
-		
-		
-		
 		
 		}
 		catch(Exception e) {
@@ -192,6 +178,34 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		
 		
 		
+		}
+	
+		//handles new booking
+		if(request.getParameter("buyBooking") != null) {
+			try {
+				//out = response.getWriter();
+				templateName = "bookingconf.ftl";
+				LoginLogic ll = new LoginLogic();
+				User u = (User) session.getAttribute("user");
+				System.out.println(u.getEmail());
+				
+				String userid = u.id().toString();
+				
+				String flightid = request.getParameter("idbutton");
+				
+				String amount = request.getParameter("pricevalue");
+				Booking b = new Booking(userid, flightid, amount);
+				ll.createBooking(b);
+				
+				
+				Template temp = cfg.getTemplate(templateName);
+				temp.process(root, out);
+				
+				
+			}
+			catch(Exception e) {
+				
+			}
 		}
 	
 		//need to add the right stuff but this generates the search page correctly
@@ -203,9 +217,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			//creates a search template with airline options added
 			try 
 			{
-				System.out.println("I'm here");
-					out = response.getWriter();
-					templateName = "search.ftl";
+				//System.out.println("I'm here");
+					//out = response.getWriter();
+					templateName = "searchedFlight.ftl";
 					List <String> myComp = new ArrayList<>();
 					LoginLogic ll = new LoginLogic();
 				
@@ -213,7 +227,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			
 			
 						root.put("airlines", myComp);
+						//Template temp = cfg.getTemplate(bannerTemplate);
+						//temp.process(root, out);
 						Template temp = cfg.getTemplate(templateName);
+						temp.process(root, out);
+						temp = cfg.getTemplate(footerTemplate);
 						temp.process(root, out);
 			
 			}
@@ -221,7 +239,14 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				e.printStackTrace();
 			}
 			
-			}			
+			}
+		
+		try {
+			cfg.getTemplate(footerTemplate).process(root, out);
+		} catch (TemplateException e1) {
+			e1.printStackTrace();
+		}
+	}
 		
 }
 	//end of method stub
