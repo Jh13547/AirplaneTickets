@@ -4,7 +4,7 @@ body, html
     margin: 0;
     font: 400 15px/1.8 "Lato", sans-serif;
 	color:white;
-    background-color:navy;
+  
 }
 div
 {
@@ -16,9 +16,11 @@ div
     padding: 1em 1em;
     display: flex;
     justify-content: flex-end;
+    background-color:grey;
 }
 .banner{
 	margin-left:8px;
+	display:none;
 }
 #bannerPopup{
 	display:none;
@@ -28,25 +30,29 @@ div
 	position:fixed;
 	right:0;
 	top:0;
-	z-index:2;
+	z-index:3;
 }
 #bannerPopupBG{
 	display:none;
-	background-color:red;
-	background:transparent;
+	background-color:grey;
+	opacity:.45;
 	width:100%;
 	height:100%;
 	position:fixed;
 	top:0;
 	left:0;
-	z-index:1;
+	z-index:2;
 }
 
 .bg
 {
+	z-index:-1;
     background-image: url(plane.jpg);
     height: 100%;
-    position: relative;
+    width:100%;
+    position: fixed;
+    top:0;
+    left:0;
     opacity: 0.65;
     background-position: center;
     background-repeat: no-repeat;
@@ -57,9 +63,8 @@ div
 .content
 {
     position: absolute;
-    left: 0;
-    top: 50%;
-    width: 100%;
+    left: 45%;
+    top: 40%;
     text-align: center;
     color: white;
 }

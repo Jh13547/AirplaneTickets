@@ -24,6 +24,7 @@ public class User {
 	public String id() {
 		return id;
 	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -40,5 +41,8 @@ public class User {
 		return password;
 	}
 
-	
+	public String toString() {
+		return id+"#"+firstName+"#"+lastName+"#"+email;
+		
+	}
 }

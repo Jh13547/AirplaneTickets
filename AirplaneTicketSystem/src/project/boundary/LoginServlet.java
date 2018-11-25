@@ -131,14 +131,12 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute("userid", id);
 				
 					//print userid for the session
-					System.out.println(session.getAttribute("userid"));
+					//System.out.println(session.getAttribute("userid"));
 					
 				}
-				
-						
 						
 			}
-			System.out.println(session.toString());
+			//System.out.println(session.toString());
 			
 		}
 		

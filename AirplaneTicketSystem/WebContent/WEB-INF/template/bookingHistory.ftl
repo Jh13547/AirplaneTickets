@@ -14,9 +14,14 @@
           <th> Airline </th>
           <th> Payment </th>
           </tr>
-          <tr>
-          
+           <#list bookings as b>
+          <tr> 
+          <td> ${b.date} </td>
+          <td> ${b.destination}</td>
+          <td> ${b.airline}</td>
+          <td> ${b.payment}</td>
           </tr>
+          </#list>
       </table>
   </body>
 </html>

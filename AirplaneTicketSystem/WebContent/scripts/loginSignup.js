@@ -10,7 +10,7 @@ var passError;
 var firstError;
 var lastError;
 
-//signup and check inputs via regular expressions
+////////Signup functions
 function signup(){
 	submitbtn = document.getElementById("Signupbtn");
 	loginForm = document.getElementById("SignupForm");
@@ -50,11 +50,6 @@ function signup(){
 	}
 	
 }
-
-//When a key is released and one of the inputs are focused
-//email.onkeyup = emailCheck;
-//pass.onkeyup = passCheck;
-
 //Checks if valid email, using a regualr expression
 function emailCheck(){
 	if(email.value==""){
@@ -86,7 +81,7 @@ function passCheck(){
 	passError.innerHTML="";
 	return true
 }
-
+//Checks the first name, starts with a capital and allows for 2 worded first names
 function firstCheck(){
 	if(first.value==""){
 		firstError.innerHTML="The first name must be filled in";
@@ -98,7 +93,7 @@ function firstCheck(){
 	firstError.innerHTML="";
 	return true
 }
-
+//Checks the last name, starts with a capital
 function lastCheck(){
 	if(last.value==""){
 		lastError.innerHTML="The last name  must be filled in";
@@ -109,4 +104,67 @@ function lastCheck(){
 	}
 	lastError.innerHTML="";
 		return true
+}
+
+//////Login funtions
+function login(){
+	submitbtn = document.getElementById("Loginbtn");
+	loginForm = document.getElementById("LoginForm");
+	email = document.getElementById("EmailText");
+	emailError = document.getElementById("EmailError");
+	pass = document.getElementById("PassText");
+	passError = document.getElementById("PassError");
+	
+	//Checks the email and pass via regular expressions
+	var good=true;
+	if(!emailCheckLG())
+		good=false
+	if(!passCheckLG())
+		good=false;
+	if(good){
+		$.ajax({
+			url:'BannerServlet',
+			data:{action: 'login',email: email.value,pass: pass.value},
+			cache: false,
+			success: function(text){
+				console.log(text);
+				//If user not found, or just a server error
+				if(text=="success"){
+					//Need to change banner to have a logged in account button////////////////////////////
+					passError.innerHTML="!!User found!! or found a session";
+					passError.style.color="green";
+					sessionCheck();
+				}else
+					passError.innerHTML="Login credentials not found";
+				
+			}
+		});
+	}
+}
+
+//When a key is released and one of the inputs are focused
+//email.onkeyup = emailCheck;
+//pass.onkeyup = passCheck;
+
+//Checks if valid email, using a regualr expression
+function emailCheckLG(){
+	if(email.value==""){
+		emailError.innerHTML="The Email must be filled in";
+		return false;
+	}else if(!(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]+$/).test(email.value)){
+		emailError.innerHTML="The Email must be an  valid email";
+		return false;
+	}
+	emailError.innerHTML="";
+	return true
+}
+
+//Checks if password is empty or not
+function passCheckLG(){
+	if(pass.value==""){
+		passError.innerHTML="The Password must be filled in";
+		return false;
+	}
+		passError.innerHTML="";
+	return true
 }

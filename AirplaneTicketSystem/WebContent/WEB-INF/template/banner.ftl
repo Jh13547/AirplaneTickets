@@ -6,19 +6,26 @@ It needs an if statement to change it if the user is already logged in by checki
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8" />
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		 <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="styles/main.css"/>
+		<link rel="stylesheet" type="text/css" media="screen" href="styles/jquery-ui.css"/>
 		<title>A Real Ticket Service, not a Project</title>
 		<script src="scripts/jquery.js"></script>
-		<#list 0..scripts?size-1 as i>
-			<script src="scripts/${scripts[i]}.js"></script>
-		</#list>
+    	<script src="scripts/jquery-ui.js"></script>
+    	<script src="scripts/home.js"></script>
+		<script src="scripts/loginSignup.js"></script>
+		<script src="scripts/banner.js"></script>
 	</head>
-	
+	<div class="bg"></div>
 	<body>
+	
 	<div id="banner">
-		<input class="banner" type="button" value="Login" onclick="showLogin()">
-		<input class="banner" type="button" value="Signup" onclick="showSignup()">
-		<div id="bannerPopupBG"></div>
+		<input class="banner" id="loginbtn" value="Login" type="button" onclick="showLogin()">
+		<input class="banner" id="signupbtn" value="SignUp" type="button" onclick="showSignup()">
+		<input class="banner" id="accounttabbtn" value="My Account" type="button" onclick="showAccountTab()">
+		<div id="bannerPopupBG" onlclick="hidePopup()"></div>
 		<div id="bannerPopup">pop</div>
 	</div>
 	
