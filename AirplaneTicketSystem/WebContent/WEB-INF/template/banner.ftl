@@ -6,6 +6,9 @@ It needs an if statement to change it if the user is already logged in by checki
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8" />
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="styles/main.css"/>
 		<link rel="stylesheet" href="styles/search.css"/>
 		<title>A Real Ticket Service, not a Project</title>
