@@ -28,6 +28,12 @@ public class Flights {
 		this.destination = destination;
 		this.departureDate = departureDate;
 	}
+	public Flights(String id,String departure, String destination, String companyName) {
+		this.departure = departure;
+		this.destination = destination;
+		this.companyName=companyName;
+		this.id=id;
+	}
 	public Flights(String id, String departureDate, int ticketsAvailable, String price) {
 		this.id = id;
 		this.departureDate = departureDate;
