@@ -72,8 +72,6 @@ public void init(ServletConfig config) throws ServletException {
 
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	System.out.println("Get method");
-	//response.getWriter().append("Served at: ").append(request.getContextPath());
-	// TODO attach logic to handle web pages
 	
 	
 			
@@ -144,8 +142,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					
 					myComp = ll.getCompanies();
 					root.put("airlines", myComp);
-					//Template temp = cfg.getTemplate(bannerTemplate);
-					//temp.process(root, out);
 					Template temp = cfg.getTemplate(templateName);
 					temp.process(root, out);
 				}
@@ -168,8 +164,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					root.put("flights", lf);
 					myComp = ll.getCompanies();
 					root.put("airlines", myComp);
-					//Template temp = cfg.getTemplate(bannerTemplate);
-					//temp.process(root, out);
 					Template temp = cfg.getTemplate(templateName);
 					temp.process(root, out);
 				
