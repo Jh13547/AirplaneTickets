@@ -34,9 +34,7 @@
         <h3>Planes</h3>
         <p>Add a new plane</p>
         <label>Company Name:</label>
-        <select id="CompanySelect" name="CompSelect">
-            <#list optionList as movie>
-            </#list>
+        <select id="CompanySelect" class="CompanySelect">
         </select>
         
         <br>
@@ -48,7 +46,7 @@
         <label>Total Seats: <input type="number" id="planeSeatNbr"> </label>
 
         <br>
-        <button id="AddPlane" onclick="addPLaneBtnPress()">Add Plane</button>
+        <button id="AddPlane" onclick="addPlaneBtnPress()">Add Plane</button>
 
         <div id="PlaneList">
             
@@ -58,46 +56,59 @@
     <div id="Flights" class="tabcontent">
         <h3>Flights</h3>
         <p>Add a flight</p>
-        <form action="AdminServlet" method="post">
-            <label>Flight Date: <input type="text" id="datepicker"> </label>
-    
-            <br>
-            
-            <label>Availble Tickets: <input type="number" name="AvalibleTicketNbr"> </label>
+		<label>Departure: <input type="text" id="deptTxt"> </label>
+        	
+    	<br>
+    	
+    	<label>Destination: <input type="text" id="destTxt"> </label>
+    	
+    	<br>
+    	
+    	<label>Company: </label>
+    	<select id="CompanySelect2" class="CompanySelect">
+    	</select>
+    	
+    	<br>
+    	
+    	<label>Available seats: <input type="number" id="AvalibleTicketNbr"> </label>
 
-            <br>
+        <br>
+    	
+        <label>Departure Date/Time: <input type="datetime-local" name="deptdatetime"> </label>
 
-            <input type="submit" name="addFlight" value="Add Flight">
+        <br>
+        
+        <label>Destination Date/Time: <input type="datetime-local" name="destdatetime"> </label>
 
-            <div id="FlightList">
-            
-            </div>
+        <br>
 
-        </form>
+        <button id="addFlight" onclick="AddFlightBtnPress()">Add Flight</button>
+
+        <div id="FlightList">
+        
+        </div>
     </div>
 
     <div id="Airports" class="tabcontent">
         <h3>Airports</h3>
         <p>Add an Airport</p>
-		<form action="AdminServlet" method="post">
-	        <label>City: <input type="text" id="cityTxt"> </label>
-	    
-	        <br>
-	        
-	        <label>State: <input type="text" id="stateTxt"> </label>
-	
-	        <br>
-	
-	        <label>Country: <input type="text" id="countryTxt"> </label>
-	
-	        <br>
-	
-	        <input type="submit" name="addFlight" value="Add Flight">
-	
-	        <div id="AirportList">
-	        
-	        </div>
-	    </form>
+        <label>City: <input type="text" id="cityTxt"> </label>
+    
+        <br>
+        
+        <label>State: <input type="text" id="stateTxt"> </label>
+
+        <br>
+
+        <label>Country: <input type="text" id="countryTxt"> </label>
+
+        <br>
+
+        <button id="addAirport" onclick="addNewAirport()">Add Flight</button>
+
+        <div id="AirportList">
+        
+        </div>
 
     </div>
 

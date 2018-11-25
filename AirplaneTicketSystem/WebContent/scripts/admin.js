@@ -9,11 +9,11 @@ $(function()
         success: function (result) {
         	for(var i=0;i<result.length;i++)
         	{
-        		$('#CompanySelect').append('<option>' + result[i] + '</option>');
+        		$('.CompanySelect').append('<option>' + result[i] + '</option>');
         	}
         },
         error: function() {
-       	 alert('Bitch Please');
+       	 alert('Error');
         }
 	});
 	
@@ -67,7 +67,6 @@ function addNewCompany()
          cache: false,
          success: function () {
         	 alert('Added new company ' + compName);
-        	 compName.text("");
          },
          error: function() {
         	 alert('Error');
@@ -75,13 +74,13 @@ function addNewCompany()
      });
 }
 
-function addPLaneBtnPress() 
+function addPlaneBtnPress() 
 {
 	var company = $('#CompanySelect').val();
 	var planeType = $('#planeTypeTxt').val();
 	var seatNumber = $('#planeSeatNbr').val();
 	
-	//console.log(company + planeType + seatNumber);
+	console.log(company + planeType + seatNumber);
 	$.ajax ({
         url: 'AdminServlet',
         data: {status:'AddNewPlane',
@@ -91,9 +90,57 @@ function addPLaneBtnPress()
         cache: false,
         success: function () {
        	 alert('Added new plane ' + company + " " + planeType + " " + seatNumber);
-       	 company.text("");
-       	 planeType.text("");
-       	 seatNumber.text("");
+        },
+        error: function() {
+       	 alert('Error');
+        }
+    });
+}
+
+function AddFlightBtnPress()
+{
+	var dept = $('#deptTxt').val();
+	var dest = $('#destTxt').val();
+	var comp = $('#CompanySelect2').val();
+	var seats = $('#AvalibleTicketNbr').val();
+	var deptdate = $('#deptdatetime').val();
+	
+	$.ajax ({
+        url: 'AdminServlet',
+        data: {status:'AddNewFLight',
+        		departure:dept,
+        		destination:dest,
+        		company:comp,
+        		seats:seats,
+        		deptdate:deptdate,
+        		destdate:destdate},
+        cache: false,
+        success: function () {
+       	 alert('Added new flight ' + dept + " " + dest + " " + comp + " " + seats + " " + date);
+        },
+        error: function() {
+       	 alert('Error');
+        }
+    });
+	
+}
+
+function addNewAirport()
+{
+	var citytxt = $('#cityTxt').val();
+	var statetxt = $('#stateTxt').val();
+	var countrytxt = $('#countryTxt').val();
+	
+	console.log(citytxt + statetxt + countrytxt);
+	$.ajax ({
+        url: 'AdminServlet',
+        data: {status:'AddNewAirport',
+        		city:citytxt,
+        		state:statetxt,
+        		country:countrytxt},
+        cache: false,
+        success: function () {
+       	 alert('Added new Airport ' + citytxt + " " + statetxt + " " + countrytxt);
         },
         error: function() {
        	 alert('Error');

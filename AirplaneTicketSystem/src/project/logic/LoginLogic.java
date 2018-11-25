@@ -68,51 +68,58 @@ public class LoginLogic {
 		
 	}
 	
-	public List<Flights> rtnFlightList(String dep, String des, Date date, int ticketsrequested){
-		db.connect();
-		
-		List<Flights> lf = new ArrayList<>();
-		String query = "select * from flights where " +
-				"where airportDES = (select airportid from airport where citytag = \"" + des + "\" and " +
-				"airportDEP = (select airportid from airport where citytag =\"" + dep + "\" and " +
-				"departureTime = \"" + date + "\" and " +
-				ticketsrequested + " >= ttlseatsonplane - ttlseatsbooked;";
-		ResultSet rs = null;
-		rs = db.retrieve(query);
-		try {
-			while(rs.next()) {
-				try {
-					//create new flight object rs.getString(1) = id
-					//rs.getDate(7) = departure date
-					//rs.getInt(5) - rs.getInt(6) = ttlseats - bookedseats == available seats
-					Flights f = new Flights(rs.getString(1), rs.getDate(7), rs.getInt(5) - rs.getInt(6));
-					lf.add(f);
-					
-					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				
-				
-				
-				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		db.disconnect();
-		//return list of flight objects here
-		return lf;
-		
-	}
+//	public List<Flights> rtnFlightList(String dep, String des, String date, int ticketsrequested){
+//		db.connect();
+//		
+//		List<Flights> lf = new ArrayList<>();
+//		String query = "select * from flights where " +
+//				"where airportDES = (select airportid from airport where citytag = \"" + des + "\" and " +
+//				"airportDEP = (select airportid from airport where citytag =\"" + dep + "\" and " +
+//				"departureTime = \"" + date + "\" and " +
+//				ticketsrequested + " >= ttlseatsonplane - ttlseatsbooked;";
+//		ResultSet rs = null;
+//		rs = db.retrieve(query);
+//		try {
+//			while(rs.next()) {
+//				try {
+//					//create new flight object rs.getString(1) = id
+//					//rs.getDate(7) = departure date
+//					//rs.getInt(5) - rs.getInt(6) = ttlseats - bookedseats == available seats
+//					Flights f = new Flights(rs.getString(1), rs.getString(7), query, rs.getInt(5) - rs.getInt(6), query);
+//					lf.add(f);
+//					
+//					
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//				
+//				
+//				
+//				
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		db.disconnect();
+//		//return list of flight objects here
+//		return lf;
+//		
+//	}
 	//this thing is confusing and may or may not cause issues not sure yet. 
-	public boolean createFlight(Flights f) {
-		//TODO create a function to insert a flight in database return if the create worked or not
-		//I made this hard to do you're welcome me.
+	public boolean createFlight(Flights f) 
+	{
+		//get destID
+		//get deptID
+		//getAirportid(String)
+		
+		//getCompID(String)
+		
+		
+		
 		return true;
 	}
 	
@@ -121,7 +128,7 @@ public class LoginLogic {
 		//DONE
 		
 		String getCompid = "select compid from planecomp " +
-							"where compane = \"" + p.getCompname() + "\";";
+							"where compname = \"" + p.getCompname() + "\";";
 		
 		db.connect();
 		int compid = 0;

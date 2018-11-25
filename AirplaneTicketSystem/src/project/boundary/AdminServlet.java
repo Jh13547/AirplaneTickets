@@ -18,7 +18,9 @@ import com.google.gson.Gson;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 import project.logic.LoginLogic;
+import project.object.Airport;
 import project.object.Companies;
+import project.object.Flights;
 import project.object.Planes;
 
 /**
@@ -101,16 +103,64 @@ public class AdminServlet extends HttpServlet {
 		{
 			String companyName = request.getParameter("companyName").toString();
 			String planeType = request.getParameter("type").toString();
-			String seatNumber = request.getParameter("seats").toString();
+			int seatNumber = Integer.parseInt(request.getParameter("seats"));
 			boolean createNewPlane = AddNewPlane(request, response, companyName, planeType, seatNumber);
 		}
+		
+		if(request.getParameter("status").equals("AddNewFLight"))
+		{
+			String dept = request.getParameter("departure").toString();
+			String dest = request.getParameter("destination").toString();
+			String company = request.getParameter("company").toString();
+			int seats = Integer.parseInt(request.getParameter("seats"));
+			String deptdate = request.getParameter("deptdate").toString();
+			String destdate = request.getParameter("destdate").toString();
+			
+			boolean createNewFlight = AddNewFlight(request, response, dept, dest, company, seats, destdate, deptdate);
+		}
+		
+		if(request.getParameter("status").equals("AddNewAirport"))
+		{
+			String city = request.getParameter("city").toString();
+			String state = request.getParameter("state").toString();
+			String country = request.getParameter("country").toString();
+			boolean createNewAirport = AddNewAirport(request, response, city, state, country);
+		}
+		
+	}
+
+	private boolean AddNewAirport(HttpServletRequest request, HttpServletResponse response, String city, String state,
+			String country) 
+	{
+		LoginLogic ll = new LoginLogic();
+		Airport newAirport = new Airport(city, state, country);
+		boolean created = ll.createAirport(newAirport);
+		return created;
+	}
+
+	private boolean AddNewFlight(HttpServletRequest request, HttpServletResponse response, String dept, String dest,
+			String company, int seats, String destdate, String deptdate) 
+	{
+		LoginLogic ll = new LoginLogic();
+		Flights newFlight = new Flights(dept, dest, company, seats, destdate, deptdate );
+		boolean created = ll.createFlight(newFlight);
+		return created;
 	}
 
 	private boolean AddNewPlane(HttpServletRequest request, HttpServletResponse response, String companyName,
-			String planeType, String seatNumber) 
+			String planeType, int seatNumber) 
 	{
+		boolean created = false;
 		LoginLogic ll = new LoginLogic();
 		Planes newPlane = new Planes(companyName, seatNumber, planeType);
+		try {
+			created = ll.createPlane(newPlane);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return created;
 	}
 
 	private void loadCompanyList(HttpServletRequest request, HttpServletResponse response) 
