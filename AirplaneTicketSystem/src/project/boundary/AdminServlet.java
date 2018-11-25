@@ -116,12 +116,10 @@ public class AdminServlet extends HttpServlet {
 			String deptdate = request.getParameter("deptdate").toString();
 			String destdate = request.getParameter("destdate").toString();
 			
-			try {
-				boolean createNewFlight = AddNewFlight(request, response, dept, dest, company, seats, destdate, deptdate);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			boolean createNewFlight = AddNewFlight(request, response, dept, dest, company, seats, destdate, deptdate);
+			response.getWriter().write(""+createNewFlight);
+
 		}
 		
 		if(request.getParameter("status").equals("AddNewAirport"))

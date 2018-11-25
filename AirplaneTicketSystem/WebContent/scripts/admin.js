@@ -104,7 +104,7 @@ function AddFlightBtnPress()
 	var comp = $('#CompanySelect2').val();
 	var seats = $('#AvalibleTicketNbr').val();
 	var deptdate = $('#deptdatetime').val();
-	
+	var destdate = $('#destdatetime').val();
 	$.ajax ({
         url: 'AdminServlet',
         data: {status:'AddNewFLight',
@@ -115,8 +115,8 @@ function AddFlightBtnPress()
         		deptdate:deptdate,
         		destdate:destdate},
         cache: false,
-        success: function () {
-       	 alert('Added new flight ' + dept + " " + dest + " " + comp + " " + seats + " " + date);
+        success: function (text) {
+       	 alert(text+' Added new flight ' + dept + " " + dest + " " + comp + " " + seats + " " + deptdate+" "+destdate);
         },
         error: function() {
        	 alert('Error');
