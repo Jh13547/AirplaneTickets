@@ -12,16 +12,16 @@ public class Flights {
 	int ticketsavialable;
 	String destinationDate;
 	String departureDate;
-	String price;
+	String price="";
 	
-	public Flights(String departure, String destination, String companyName, int ticketsavailable, String destinationDate, String departureDate) {
+	public Flights(String departure, String destination, String companyName, int ticketsavailable, String destinationDate, String departureDate,String price) {
 		this.departure = departure;
 		this.destination = destination;
 		this.companyName = companyName;
 		this.destinationDate = destinationDate;
 		this.departureDate = departureDate;
 		this.ticketsavialable = ticketsavailable;
-		
+		this.price=price;
 	}
 	public Flights(String departure, String destination, String departureDate) {
 		this.departure = departure;

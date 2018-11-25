@@ -142,8 +142,8 @@ public class LoginLogic {
 		int destination = getAirportid(f.getDestination());
 		int compid = getCompId(f.getCompanyName());
 		
-		String query = "Insert into Flights (airportDes, airportDep, planeid, ttlseatsonplane, ttlseatsbooked,departureTime, arrivalTime) values("
-				+ "\""+ destination + "\",  \"" + departure + "\" , \"" +  compid + "\" , \"" + f.getTicketsavialable() + "\" ,0, \"" + f.getDepartureDate() + "\" , \"" + f.getDestinationDate() + "\");";
+		String query = "Insert into Flights (airportDes, airportDep, planeid, ttlseatsonplane, ttlseatsbooked,departureTime, arrivalTime,price) values("
+				+ "\""+ destination + "\",  \"" + departure + "\" , \"" +  compid + "\" , \"" + f.getTicketsavialable() + "\" ,0, \"" + f.getDepartureDate() + "\" , \"" + f.getDestinationDate() + "\",'"+f.getPrice()+"');";
 	
 		db.connect();
 		if(db.update(query)>0) {

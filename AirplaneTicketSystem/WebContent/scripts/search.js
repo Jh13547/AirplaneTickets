@@ -5,7 +5,7 @@ $(function()
     //load everything needed for the search filters
     
     // testing
-    var arr = ["Atlanta", "Dallas", "Houston", "New York"];
+	var arr = ["Atlanta", "Dallas", "Houston", "New York","Austin","Boston","Orlando"];
     
     $('#dept').autocomplete ({
         source: arr

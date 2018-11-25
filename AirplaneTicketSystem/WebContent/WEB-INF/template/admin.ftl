@@ -81,6 +81,8 @@
         <label>Destination Date/Time: <input type="datetime-local" id="destdatetime"> </label>
 
         <br>
+        
+        <label>Price: <input type="text" id="price"> </label><br>
 
         <button id="addFlight" onclick="AddFlightBtnPress()">Add Flight</button>
 
