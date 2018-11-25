@@ -2,9 +2,6 @@ package project.object;
 
 public class Booking {
 
-	String bookingid, uid, flightid;
-	String amountbooked;
-
 	
 	String departure,destination, company,uid, flightid,amountbooked,bookingid;
 	

@@ -120,21 +120,22 @@ public class LoginLogic {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return lf;
 		
 		
 
 	}
 	//this thing is confusing and may or may not cause issues not sure yet. 
-	public boolean createFlight(Flights f) {
+	public boolean createFlight(Flights f) throws SQLException {
 		//TODO create a function to insert a flight in database return if the create worked or not
 		//I'm just writting a function to get ids for this and planes b/c man
 		
-		int departure = getAirportId(f.departure);
-		int destination = getAirportId(f.destination);
-		int compid = getCompId(f.companyName);
+		int departure = getAirportid(f.getDeparture());
+		int destination = getAirportid(f.getDestination());
+		int compid = getCompId(f.getCompanyName());
 		
 		String query = "Insert into Flights(airportDes, airportDep, planeid, ttlseatsonplane, departureTime, arivalTime) values"
-				+ "\""+ destination + "\",  \"" + departure + "\" , \"" +  compid + "\" , \"" + f.ticketsavialable + "\" , \"" + f.departureDate + "\" , \"" + f.destinationDate + "\");";
+				+ "\""+ destination + "\",  \"" + departure + "\" , \"" +  compid + "\" , \"" + f.getTicketsavialable() + "\" , \"" + f.getDepartureDate() + "\" , \"" + f.getDestinationDate() + "\");";
 	
 
 		return true;
@@ -326,7 +327,7 @@ public class LoginLogic {
 	}
 	
 	
-	public int getCompId(String name) {
+	public int getCompId(String name) throws SQLException {
 		String getCompid = "select compid from planecomp " +
 				"where compane = \"" + name + "\";";
 
@@ -341,10 +342,12 @@ public class LoginLogic {
 		return compid;
 }
 
-	}
+	
 
 	
 	
-	
-}
+
+
 //end of method stub
+}
+
