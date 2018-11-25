@@ -68,12 +68,31 @@ function popupHTML(temp){
 //With session/signed-in buttons
 
 function gotoAccount(){
-	
+	$.ajax({
+		url:'AccountInfoServlet',
+		data:{status:'GotoAccount'},
+		cache:false,
+		success:function(text){
+			console.log("Success")
+			},
+		error: function(){
+			console.log("failed")
+		}
+	});
 }
 
 function gotoBookings(){
-	
-	
+	$.ajax({
+		url:'AccountInfoServlet',
+		data:{status:'GotoBookings'},
+		cache:false,
+		success:function(text){
+			console.log("Success")
+			},
+		error: function(){
+			console.log("failed")
+		}
+	});
 }
 
 function gotoAdmin(){
