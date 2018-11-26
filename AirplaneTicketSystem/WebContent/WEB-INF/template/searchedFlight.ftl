@@ -4,19 +4,19 @@
 
                 <form action="FlightSearchLogin" method="POST">
                 	<table>
-                    <tr><td><label for="">Destination:</label></td> <td><input type="text" name="destination" id="dest"></td></tr>
-                    <tr><td><label for="">Departure:</label></td> <td><input type="text" name="departure" id="dept"></td></tr>
-                    <tr><td><label for="">Date:</label></td> <td><input type="date" name="date" id="date"></td></tr>
+                    <tr><td><label for="">Destination:</label></td> <td><input type="text" name="destination" id="dest" class="form-control"></td></tr>
+                    <tr><td><label for="">Departure:</label></td> <td><input type="text" name="departure" id="dept" class="form-control"></td></tr>
+                    <tr><td><label for="">Date:</label></td> <td><input type="date" name="date" id="date" class="form-control"></td></tr>
                     <!--
                     	<tr><td><label for="">Return flight?</label></td> <td><input type="checkbox" name="returnFlight" id="returnFlight"></td></tr>
                     	<tr><td><label for="">Return Date:</label></td> <td><input type="date" name="returnDate" id="returnDate"></td></tr>
                     -->
                     <tr><td><label for="">Airline:</label></td> 
-                    <td><select name="AirlineOption" id="AirlineOp">
+                    <td><select name="AirlineOption" id="AirlineOp" class="form-control">
                       <#list airlines as airline>
   								<option value="${airline}">${airline}</option>
   						</#list></td></tr>
-                   <tr><td> <input type="submit" name="flSearch" value="Search"></td></tr>
+                   <tr><td></td><td> <input type="submit" name="flSearch" value="Search" class="btn btn-success"></td></tr>
                    
                    </table>
                 </form>
@@ -28,7 +28,7 @@
            
            
             <form action="FlightSearchLogin" class="results" method="post">
-						<table>
+						<table style="padding: 5px;">
 							<tr>
 
 								<td>Flight Time</th>
@@ -42,21 +42,21 @@
 							<#else>
 							<#assign x=1>
 							</#if>
-							<table class="oddoreven${x}">
+							<table class="oddoreven${x}" style="padding-right: 50px;">
 							<tr>
 								
 								<td>${Flights.departureDate[10..15]}</td>
 								<td>$${Flights.price}</td>
 								
-							
-								<td colspan="2"><input type="number" name="seatsreq" min="1"></td>
-								<td colspan="2">
+							<div class="form-group">
+								<td colspan="3"><input type="number" name="seatsreq" style="width:75px; margin-left: 100px;" value= "1" min="1"/></td>
+							</div>
 								<input type="hidden" value="${Flights.id}" name="idbutton">
 								<input type="hidden" value="${Flights.price}" name="pricevalue">
 							</tr>
 								<tr>
 								<td colspan="3">
-								<input type="submit" name="buyBooking" value="Buy Now" </td>
+								<input type="submit" name="buyBooking" value="Buy" id="buybutton" class="btn btn-primary"></td>
 								</td>
 							</tr>
 							</table>

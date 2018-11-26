@@ -12,6 +12,7 @@ It needs an if statement to change it if the user is already logged in by checki
 		<link rel="stylesheet" href="styles/main.css"/>
 		<link rel="stylesheet" href="styles/search.css"/>
 		<link rel="stylesheet" href="styles/jquery-ui.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<title>A Real Ticket Service, not a Project</title>
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/jquery-ui.js"></script>
@@ -22,11 +23,19 @@ It needs an if statement to change it if the user is already logged in by checki
 	<div class="bg"></div>
 	<body>
 	
+	
+	
+	
 	<div id="banner">
-		<input class="banner" id="searchbtn" value="Search" type="button" onclick="gotoSearch()" style="display:block;">
-		<input class="banner" id="loginbtn" value="Login" type="button" onclick="showLogin()">
-		<input class="banner" id="signupbtn" value="SignUp" type="button" onclick="showSignup()">
-		<input class="banner" id="accounttabbtn" value="My Account" type="button" onclick="showAccountTab()">
+	<div id="logo">
+		
+	</div>
+	<br>
+	<br>
+		<input class="banner btn btn-info" id="searchbtn" value="Search"  type="button" onclick="gotoSearch()" style="display:block;">
+		<input class="banner btn btn-info" id="loginbtn" value="Login" type="button" onclick="showLogin()">
+		<input class="banner btn btn-info" id="signupbtn" value="SignUp" type="button" onclick="showSignup()">
+		<input class="banner btn btn-info" id="accounttabbtn" value="My Account" type="button" onclick="showAccountTab()">
 		<div id="bannerPopupBG" onlclick="hidePopup()"></div>
 		<div id="bannerPopup">pop</div>
 	</div>

@@ -35,7 +35,7 @@ div
 .results
 {
 	background-color: white;
-	margin: auto;
+
 	border: 1px solid black;
 	width: 50%;
 	
@@ -55,13 +55,23 @@ div
 .oddoreven1
 {
 	background-color: white;
-		
+	height: 60px;
+	align: center;
+	
 }
 
 .oddoreven0
 {
 	background-color: lightgrey;	
-	border: 2px solid lightgrey;
-	margin: 0;
-	padding: 0;
+	height: 75px;
+	align: center;
+	
+}
+#buybutton{
+	height: 25px;
+	width: 50px;
+	
+}
+.form-control{
+	margin-bottom: 5px;
 }

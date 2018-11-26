@@ -26,17 +26,17 @@
                 <h2>Search Criteria</h2>
 
                 <form action="" method="post">
-                    <label for="">Destination:</label> <input type="text" name="destination" id="dest">
+                    <label for="">Destination:</label> <input type="text" name="destination" class="form-group" id="dest">
                     <br>
-                    <label for="">Departure:</label> <input type="text" name="departure" id="dep">
+                    <label for="">Departure:</label> <input type="text" class="form-group" name="departure" id="dep">
                     <br>
-                    <label for="">Date:</label> <input type="date" name="date" id="date">
+                    <label for="">Date:</label> <input type="date" class="form-group" name="date" id="date">
                     <br>
                     <label for="">Return flight?</label> <input type="checkbox" name="returnFlight" id="returnFlight">
                     <br>
                     <label for="">Return Date:</label> <input type="date" name="returnDate" id="returnDate">
                     <br>
-                    <label for="">Airline:</label> <select name="AirlineOption" id="AirlineOp">
+                    <label for="">Airline:</label> <select name="AirlineOption" class="form-group" id="AirlineOp">
                     
                                                   <#list airlines as airline>
 												<option value="${airline}">${airline}</option>
@@ -45,7 +45,7 @@
                     <br>
                     <label for="">Direct flight?</label> <input type="checkbox" name="directFlight" id="directFlight">
                     <br>
-                    <input type="submit" value="Search">
+                    <input type="submit" class="btn btn-success" value="Search">
                 </form>
 
             </div>

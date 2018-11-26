@@ -68,3 +68,8 @@ div
     text-align: center;
     color: white;
 }
+.bannertable tr{
+	margin-bottom: 10px;
+}
+
+

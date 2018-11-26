@@ -4,8 +4,8 @@
       <table class="results">
       <tr>
           <th> Confirmation Number </th>
-          <th> Departure </th>
           <th> Destination </th>
+          <th> Depature </th>
           <th> Departure Date </th>
           </tr>
           
