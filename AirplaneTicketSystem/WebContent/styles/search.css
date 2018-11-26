@@ -30,6 +30,7 @@ div
     left: 28%;
     padding: 20px;
     border-radius: 20px;
+    margin: auto;
 }
 .results
 {
@@ -37,10 +38,30 @@ div
 	margin: auto;
 	border: 1px solid black;
 	width: 50%;
-	padding: 5px, 0;
+	
+}
+.results td{
+	margin: auto;
+	text-align:center;
+	width: 200px;
+	heigh: 100px;
 }
 
 #returnDateEffect
 {
     position: relative;
+}
+
+.oddoreven1
+{
+	background-color: white;
+		
+}
+
+.oddoreven0
+{
+	background-color: lightgrey;	
+	border: 2px solid lightgrey;
+	margin: 0;
+	padding: 0;
 }

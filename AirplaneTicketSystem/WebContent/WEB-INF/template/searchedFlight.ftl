@@ -22,39 +22,48 @@
                 </form>
 
             </div>
-
+			<#assign x = 1>
+			
             <div class="searchResults" id="searchResults">
            
-				<#list flights as Flights>
-				
-				 <form action="FlightSearchLogin" class="results" method="post">
+           
+            <form action="FlightSearchLogin" class="results" method="post">
 						<table>
 							<tr>
 
-								<th>Flight Date</th>
-								<th>Flight Cost</th>
-								<th>Seats Requested</th>
-	
-							
-							<tr>
-						
+								<td>Flight Time</th>
+								<td>Flight Cost</th>
+								<td colspan="1">Seats Requested</th>
+								
+								</tr>
+								<#list flights as Flights>
+							<#if x=1>
+							<#assign x=0>
+							<#else>
+							<#assign x=1>
+							</#if>
+							<table class="oddoreven${x}">
 							<tr>
 								
-								<td>${Flights.departureDate}</td>
+								<td>${Flights.departureDate[10..15]}</td>
 								<td>$${Flights.price}</td>
 								
 							
-								<td><input type="number" name="seatsreq"></td>
+								<td colspan="2"><input type="number" name="seatsreq" min="1"></td>
 								<td colspan="2">
 								<input type="hidden" value="${Flights.id}" name="idbutton">
 								<input type="hidden" value="${Flights.price}" name="pricevalue">
-								
-								<input type="submit" name="buyBooking" value="Buy Now"></td>
-								
 							</tr>
+								<tr>
+								<td colspan="3">
+								<input type="submit" name="buyBooking" value="Buy Now" </td>
+								</td>
+							</tr>
+							</table>
+							</#list>
 						</table>
 				</form>
-				</#list>
+				
             </div>
           
 
