@@ -43,6 +43,7 @@ public class DbAccessImpl extends DbAccessConfiguartion {
 			e.printStackTrace();
 		}
 		int i = 0;
+		System.out.println(query);
 		try {
 			i = statement.executeUpdate(query);
 		} catch (SQLException e) {

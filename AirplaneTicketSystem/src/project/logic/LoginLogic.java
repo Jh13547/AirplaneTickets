@@ -146,11 +146,17 @@ public class LoginLogic {
 		int destination = getAirportid(f.getDestination());
 		int compid = getCompId(f.getCompanyName());
 		
-		String query = "Insert into Flights(airportDes, airportDep, planeid, ttlseatsonplane, departureTime, arivalTime) values"
-				+ "\""+ destination + "\",  \"" + departure + "\" , \"" +  compid + "\" , \"" + f.getTicketsavialable() + "\" , \"" + f.getDepartureDate() + "\" , \"" + f.getDestinationDate() + "\");";
+		String query = "Insert into Flights (airportDes, airportDep, planeid, ttlseatsonplane, ttlseatsbooked,departureTime, arrivalTime) values("
+				+ "\""+ destination + "\",  \"" + departure + "\" , \"" +  compid + "\" , \"" + f.getTicketsavialable() + "\" ,0, \"" + f.getDepartureDate() + "\" , \"" + f.getDestinationDate() + "\");";
 	
-
-		return true;
+		db.connect();
+		if(db.update(query)>0) {
+			db.disconnect();
+			return true;
+		}
+		db.disconnect();
+		return false;
+		
 	}
 	
 	public boolean createPlane(Planes p) throws SQLException {
@@ -172,7 +178,7 @@ public class LoginLogic {
 		
 		
 		int i = db.update(query);
-		
+		db.disconnect();
 		if(i > 0) {
 		
 		return true;
