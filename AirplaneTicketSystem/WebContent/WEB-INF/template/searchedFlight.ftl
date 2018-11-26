@@ -33,7 +33,7 @@
 
 								<td>Flight Time</th>
 								<td>Flight Cost</th>
-								<td colspan="1">Seats Requested</th>
+								<td>Seats Needed</th>
 								
 								</tr>
 								<#list flights as Flights>
@@ -42,14 +42,14 @@
 							<#else>
 							<#assign x=1>
 							</#if>
-							<table class="oddoreven${x}" style="padding-right: 50px;">
+							<table class="oddoreven${x}" style="padding-right: 50px; text-align: center;">
 							<tr>
+								<div class="form-group">
+								<td style="width:33%;">${Flights.departureDate[10..15]}</td>
+								<td style="width:33%;">$${Flights.price}</td>
 								
-								<td>${Flights.departureDate[10..15]}</td>
-								<td>$${Flights.price}</td>
-								
-							<div class="form-group">
-								<td colspan="3"><input type="number" name="seatsreq" style="width:75px; margin-left: 100px;" value= "1" min="1"/></td>
+							
+								<td style="width:33%;"><input type="number" name="seatsreq"  value= "1" min="1"/></td>
 							</div>
 								<input type="hidden" value="${Flights.id}" name="idbutton">
 								<input type="hidden" value="${Flights.price}" name="pricevalue">

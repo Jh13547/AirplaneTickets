@@ -133,7 +133,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					root.put("date", date);
 					root.put("airline", airline);						
 					List<Flights> lf = new ArrayList<>();
-					lf = ll.rtnFlightList(departure, destination, date);
+					lf = ll.rtnFlightList(departure, destination, date, airline);
 					List<Flights> rf = new ArrayList<>();
 					rf = ll.rtnFlightList(destination, departure, returnDate);
 					root.put("flights", lf);
@@ -161,7 +161,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					root.put("date", date);
 					root.put("airline", airline);						
 					List<Flights> lf = new ArrayList<>();
-					lf = ll.rtnFlightList(departure, destination, date);
+					lf = ll.rtnFlightList(departure, destination, date, airline);
 					root.put("flights", lf);
 					myComp = ll.getCompanies();
 					root.put("airlines", myComp);
@@ -306,10 +306,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	}
 		
 }
-	private int valueof(String seats) {
-	// TODO Auto-generated method stub
-	return 0;
-}
+	
 
 	//end of method stub
 	

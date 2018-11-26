@@ -140,6 +140,41 @@ public class LoginLogic {
 		
 
 	}
+		public List<Flights> rtnFlightList(String dep, String des, String date, String airline){
+			db.connect();
+			
+			List<Flights> lf = new ArrayList<>();
+			String query = "select * from flights where " +
+					"airportDES = (select airportid from airport where citytag = \"" + des + "\") and " +
+					"airportDEP = (select airportid from airport where citytag =\"" + dep + "\") and " +
+					"planeid = (select compid from planecomp where compname =\"" + airline + "\") and " + 
+					"INSTR(departureTime, \""  + date +  "\");";
+			
+			
+			System.out.println(query);
+			ResultSet rs = db.retrieve(query);
+			try {
+				while(rs.next()) {
+					try {
+						//create new flight object rs.getString(1) = id
+						//rs.getDate(7) = departure date
+						//rs.getInt(5) - rs.getInt(6) = ttlseats - bookedseats == available seats
+						Flights f = new Flights(rs.getString(1), rs.getString(7), rs.getInt(5) - rs.getInt(6), rs.getString(9));
+						lf.add(f);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return lf;
+			
+		}
+		
+		
 	//this thing is confusing and may or may not cause issues not sure yet. 
 	public boolean createFlight(Flights f) throws SQLException {
 		//TODO create a function to insert a flight in database return if the create worked or not

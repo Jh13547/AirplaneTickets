@@ -46,6 +46,11 @@ div
 	width: 200px;
 	heigh: 100px;
 }
+th{
+	margin: auto;
+	text-align:center;
+	}
+}
 
 #returnDateEffect
 {
