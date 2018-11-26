@@ -45,8 +45,13 @@ div
 	left:0;
 	z-index:2;
 }
+
 .bannerbtn{
 	width:100%;
+}
+
+input.form-group{
+	color:black;
 }
 
 .bg
