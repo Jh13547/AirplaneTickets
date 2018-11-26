@@ -104,6 +104,7 @@ function AddFlightBtnPress()
 	var comp = $('#CompanySelect2').val();
 	var seats = $('#AvalibleTicketNbr').val();
 	var deptdate = $('#deptdatetime').val();
+	var destdate = $('#destdatetime').val()
 	
 	$.ajax ({
         url: 'AdminServlet',

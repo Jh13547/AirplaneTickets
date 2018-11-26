@@ -113,8 +113,8 @@ public class AdminServlet extends HttpServlet {
 			String dest = request.getParameter("destination").toString();
 			String company = request.getParameter("company").toString();
 			int seats = Integer.parseInt(request.getParameter("seats"));
-			String deptdate = request.getParameter("deptdate").toString();
-			String destdate = request.getParameter("destdate").toString();
+			String deptdate = request.getParameter("deptdatetime");
+			String destdate = request.getParameter("destdatetime");
 			
 			try {
 				boolean createNewFlight = AddNewFlight(request, response, dept, dest, company, seats, destdate, deptdate);

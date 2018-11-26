@@ -23,6 +23,8 @@ import freemarker.template.TemplateExceptionHandler;
 import project.logic.AccountInfoLogic;
 import project.logic.LoginLogic;
 import project.object.Booking;
+import project.object.BookingHistory;
+import project.object.Flights;
 import project.object.User;
 
 /**
@@ -129,17 +131,34 @@ public class AccountInfoServlet extends HttpServlet {
 	try {
 				templateName = "bookingHistory.ftl";
 				AccountInfoLogic log = new AccountInfoLogic();
-				ArrayList<Booking> bookingList = (ArrayList<Booking>) log.getBookings(id);
-			
-				for (int i = 0; i < bookingList.size(); i++) {
-					Booking book = bookingList.get(i);
-					String[] flightinfo = log.getFlightInfo(book.getFlightid());
-					String company = log.getCompany(book.getFlightid());
-					book.setDeparture(flightinfo[0]);
-					book.setDestination(flightinfo[1]);
-					book.setCompany(company);
+				List<Booking> bookingList = (ArrayList<Booking>) log.getBookings(id);
+				
+				List<BookingHistory> bh = new ArrayList<>();
+					LoginLogic llo = new LoginLogic();
+					String dept = null;
+					String dest = null;
+					String depatruretime = null;
+				for(Booking b: bookingList) {
+					Flights f = llo.getFlight(Integer.parseInt(b.getFlightid()));
+					BookingHistory bhis = new BookingHistory(b.getBookingid(), llo.getAirportName(f.getDeparture()), llo.getAirportName(f.getDestination()), f.getDepartureDate());
+					bh.add(bhis);
 				}
-				root.put("bookings", bookingList);
+				
+				
+				
+//				for (int i = 0; i < bookingList.size(); i++) {
+//					
+//					
+//					Booking book = bookingList.get(i);
+//					String[] flightinfo = log.getFlightInfo(book.getFlightid());
+//					String company = log.getCompany(book.getFlightid());
+//					book.setDeparture(flightinfo[0]);
+//					book.setDestination(flightinfo[1]);
+//					book.setCompany(company);
+//				}
+				
+				
+				root.put("bookings", bh);
 				Template temp = cfg.getTemplate(templateName);
 				temp.process(root, out);
 			}

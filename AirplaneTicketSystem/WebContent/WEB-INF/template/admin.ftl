@@ -74,11 +74,11 @@
 
         <br>
     	
-        <label>Departure Date/Time: <input type="datetime-local" name="deptdatetime"> </label>
+        <label>Departure Date/Time: <input type="datetime-local" id="deptdatetime"> </label>
 
         <br>
         
-        <label>Destination Date/Time: <input type="datetime-local" name="destdatetime"> </label>
+        <label>Destination Date/Time: <input type="datetime-local" id="destdatetime"> </label>
 
         <br>
 
