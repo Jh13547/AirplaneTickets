@@ -1,9 +1,8 @@
-
-<table>
-	<tr style="margin-top: 10px;">
+<table class="bannerbtn">
+	<tr>
 	<td>
 	<form action="AccountInfoServlet" method="post">
-	<input id="accountbtn" style="padding-bottom: 10px;" class="btn btn-info" type="submit" name="status" value="My Account">
+	<input id="accountbtn" class="bannerbtn btn btn-info" type="submit" name="status" value="My Account">
 	<br>
 	</form>
 	</td>
@@ -11,21 +10,21 @@
 	<tr>
 	<td>
 	<form action="AccountInfoServlet" method="post">
-	<input id="bookingsbtn" class="btn btn-info" type="submit" name="status" value="My Bookings">
+	<input id="bookingsbtn" class="bannerbtn btn btn-info" type="submit" name="status" value="My Bookings">
 	</form>
 	</td>
 	</tr>
 	<tr>
 	<td>
 	<form action="BannerServlet" method="post">
-	<input id="adminbtn" class="btn btn-info" type="submit" name="template" value="Admin">
+	<input id="adminbtn" class="bannerbtn btn btn-info" type="submit" name="template" value="Admin">
 	<input type="hidden" name="action" value="template">
 	</form>
 	</td>
 	</tr>
 	<tr>
 	<td>
-	<input id="signoutbtn" class="btn btn-info" type="button" value="Sign Out" onclick="signOut()">
+	<input id="signoutbtn" class="bannerbtn btn btn-info" type="button" value="Sign Out" onclick="signOut()">
 	</td>
 	</tr>
 </table>

@@ -4,7 +4,6 @@ body, html
     margin: 0;
     font: 400 15px/1.8 "Lato", sans-serif;
 	color:white;
-  
 }
 div
 {
@@ -21,16 +20,19 @@ div
 .banner{
 	margin-left:8px;
 	display:none;
+	
 }
 #bannerPopup{
 	display:none;
 	border: solid black 2pt;
 	background-color:grey;
-	width:350px;
+	width:250px;
 	position:fixed;
 	right:0;
 	top:0;
 	z-index:3;
+	color:white;
+	vertical-align:middle;
 }
 #bannerPopupBG{
 	display:none;
@@ -42,6 +44,9 @@ div
 	top:0;
 	left:0;
 	z-index:2;
+}
+.bannerbtn{
+	width:100%;
 }
 
 .bg
