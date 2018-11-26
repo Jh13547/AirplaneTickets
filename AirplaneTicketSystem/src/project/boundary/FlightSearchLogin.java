@@ -208,18 +208,16 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				String flightid = request.getParameter("idbutton");
 				String amount = request.getParameter("pricevalue");
 				String seats = request.getParameter("seatsreq");
+				
+				
 				int seatsno = Integer.parseInt(seats);
 				int flightamount = Integer.parseInt(amount);
+				
+				
 				int ttl = seatsno * flightamount;
 				System.out.println("seat total " + seatsno);
 				System.out.println("flight amount: " + flightamount);
-				
-				
 				String ttlamount = ttl + "";
-				
-				
-				
-				
 				Booking b = new Booking(userid, flightid, ttlamount);
 				ll.createBooking(b);
 				String useremail = u.getEmail();

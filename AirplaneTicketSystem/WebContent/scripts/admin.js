@@ -103,9 +103,10 @@ function AddFlightBtnPress()
 	var dest = $('#destTxt').val();
 	var comp = $('#CompanySelect2').val();
 	var seats = $('#AvalibleTicketNbr').val();
-	var deptdate = $('#deptdatetime').val();
 	var destdate = $('#destdatetime').val();
+	var deptdate = $('#deptdatetime').val();
 	var price = $('#price').val();
+
 	$.ajax ({
         url: 'AdminServlet',
         data: {status:'AddNewFLight',

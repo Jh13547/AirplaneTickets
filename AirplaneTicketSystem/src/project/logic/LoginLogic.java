@@ -319,9 +319,8 @@ public class LoginLogic {
 		db.disconnect();
 		return myAirportList;					
 	}
-	
+	//returns an airportid given a name of the airport
 	public int getAirportid(String airportname) {
-		//TODO function to get an airport id realized I needed this function to clean code :') feels bad man
 		int airportid = -1;
 		
 		db.connect();
@@ -329,8 +328,10 @@ public class LoginLogic {
 		ResultSet rs = null;
 		rs = db.retrieve(query);
 		try {
-			while(rs.next())
+			
+			while(rs.next()) {
 			airportid = rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -341,7 +342,7 @@ public class LoginLogic {
 		
 	}
 	
-	
+	//returns companyid given a name
 	public int getCompId(String name) throws SQLException {
 		String getCompid = "select compid from planecomp " +
 				"where compname = \"" + name + "\";";
@@ -356,12 +357,49 @@ public class LoginLogic {
 		}
 		return compid;
 }
-
-	
-
 	
 	
-
+	//returns a flight given an id
+	public Flights getFlight(int id) {
+		String query = "Select * from flights where flightid = \"" + id + "\";";
+		
+		Flights f = null;
+		db.connect();
+		ResultSet rs = null;
+		rs = db.retrieve(query);
+		try {
+			while(rs.next()){
+				f = new Flights(rs.getString(2), rs.getString(3), rs.getString(7));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return f;
+		
+	}
+	//returns the airportname given an id
+	public String getAirportName(String id) {
+		String query = "select citytag from airport where airportid = \"" + id + "\";";
+		db.connect();
+		ResultSet rs = null;
+		String airportname = null;
+		rs = db.retrieve(query);
+		try {
+			while(rs.next()) {
+				airportname = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		db.disconnect();
+		
+		return airportname;
+		
+	}
 
 //end of method stub
 }

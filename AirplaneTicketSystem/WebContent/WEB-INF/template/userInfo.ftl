@@ -1,8 +1,8 @@
 
-  <h1> Booking History</h1>
+  <h1>Account Information</h1>
       <div class="infoPersonal">
        
-          <form>
+          <form class="results">
             <label>Name</label>
               ${user.firstName} ${user.lastName}
               <br>

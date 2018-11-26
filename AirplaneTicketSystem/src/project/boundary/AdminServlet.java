@@ -113,6 +113,7 @@ public class AdminServlet extends HttpServlet {
 			String dest = request.getParameter("destination");
 			String company = request.getParameter("company");
 			int seats = Integer.parseInt(request.getParameter("seats"));
+
 			String deptdate = request.getParameter("deptdate");
 			String destdate = request.getParameter("destdate");
 			String price = request.getParameter("price");
