@@ -2,24 +2,22 @@
 
                 <h2>Search Criteria</h2>
 
-                <form action="FlightSearchLogin" method="POST">
+                <form id="searchform" action="FlightSearchLogin" method="POST">
                 	<table>
                     <tr><td><label for="">Destination:</label></td> <td><input type="text" name="destination" id="dest" class="form-control"></td></tr>
                     <tr><td><label for="">Departure:</label></td> <td><input type="text" name="departure" id="dept" class="form-control"></td></tr>
                     <tr><td><label for="">Date:</label></td> <td><input type="date" name="date" id="date" class="form-control"></td></tr>
-                    <!--
-                    	<tr><td><label for="">Return flight?</label></td> <td><input type="checkbox" name="returnFlight" id="returnFlight"></td></tr>
-                    	<tr><td><label for="">Return Date:</label></td> <td><input type="date" name="returnDate" id="returnDate"></td></tr>
-                    -->
                     <tr><td><label for="">Airline:</label></td> 
                     <td><select name="AirlineOption" id="AirlineOp" class="form-control">
                       <#list airlines as airline>
   								<option value="${airline}">${airline}</option>
   						</#list></td></tr>
-                   <tr><td></td><td> <input type="submit" name="flSearch" value="Search" class="btn btn-success"></td></tr>
                    
-                   </table>
-                </form>
+                   <input type="hidden" name="flSearch" value="Search">
+                   </table> 
+                   </form>
+                   <input type="submit" id="searchBtn" name="flSearch" value="Search" class="btn btn-success">
+               
 
             </div>
 			<#assign x = 1>
