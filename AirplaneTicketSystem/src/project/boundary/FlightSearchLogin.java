@@ -121,9 +121,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				System.out.println(directFlight);
 			
 				
-				
-				
-				
 				if(returnFlight != null) {
 					
 					
@@ -145,15 +142,23 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					root.put("airlines", myComp);
 					Template temp = cfg.getTemplate(templateName);
 					temp.process(root, out);
-				}
-//				else if(returnFlight.equals("on") && directFlight.equals("off")) {
-//					//if returnflight has been clicked do something here
-//					
-//					
-//					
-//					
-//				}
-				else{
+				}else if(request.getParameter("indexpage")!=null){
+					//if directFlight has been clicked do something here
+					
+					root.put("des", destination);
+					root.put("dep", departure);
+					root.put("date", date);
+					root.put("airline", airline);						
+					List<Flights> lf = new ArrayList<>();
+					lf = ll.rtnFlightList(departure, destination, date);
+					root.put("flights", lf);
+					myComp = ll.getCompanies();
+					root.put("airlines", myComp);
+					Template temp = cfg.getTemplate(templateName);
+					temp.process(root, out);
+				
+					
+				}else{
 					//if directFlight has been clicked do something here
 					
 					root.put("des", destination);
