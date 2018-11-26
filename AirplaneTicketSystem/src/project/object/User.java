@@ -33,8 +33,9 @@ public class User {
 	};
 	
 	public String id() {
-		return id;
-	}
+		return id;}
+	public void setId(String i) {
+		id=i;}
 	
 	public String getFirstName() {
 		return firstName;

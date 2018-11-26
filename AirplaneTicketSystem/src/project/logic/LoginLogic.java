@@ -29,15 +29,22 @@ public class LoginLogic {
 		//db stuff call connect and disconnect before and after 
 		db.connect();
 		int j = db.create(query);
-		db.disconnect();
+		ResultSet rs =db.retrieve("Select uid from login where uemail='"+u.getEmail()+"';");
 		
 		//if success create of one user return true in the program
 		if(j == 1) {
+			try {
+				while(rs.next())
+					u.setId(rs.getString(1));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}db.disconnect();
 			return true;
-		}
 		
-		//did nto successfully create a user
-		else
+		
+		
+		//did not successfully create a user
+		}else
 			return false;
 	}
 	
@@ -400,7 +407,21 @@ public class LoginLogic {
 		return airportname;
 		
 	}
-
+	
+	public String[] getCities() {
+		List<String> cities = new ArrayList<String>();
+		db.connect();
+		ResultSet rs= db.retrieve("select citytag from airport;");
+		try {
+			while(rs.next())
+				cities.add(rs.getString(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return (String[]) cities.toArray();
+	}
+	
+	
 //end of method stub
 }
 
