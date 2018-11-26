@@ -10,11 +10,13 @@
           </tr>
           
            <#list bookings as b>
+
            <tr> 
           <td> ${b.confnumber} </td>
           <td> ${b.deplocation}</td>
           <td> ${b.destlocation}</td>
           <td> ${b.deptdate}</td>
+
           </tr>
           </#list>
           

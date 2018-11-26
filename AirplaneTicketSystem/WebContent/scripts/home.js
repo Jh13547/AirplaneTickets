@@ -4,7 +4,7 @@ $(function ()
     // on load get a array of all destinations and departures
     
     // add autocomplete to both text boxes
-    var arr = ["Atlanta", "Dallas", "Houston", "New York","Austin"];
+    var arr = ["Atlanta", "Dallas", "Houston", "New York","Austin","Boston","Orlando"];
     
     $('#dept').autocomplete ({
         source: arr
@@ -37,6 +37,6 @@ $(function ()
     // });
 
     // date picker
-    $('#date').datepicker();
+    //$('#date').datepicker();
 
 });

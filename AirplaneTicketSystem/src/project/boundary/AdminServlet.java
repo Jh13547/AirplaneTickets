@@ -109,19 +109,23 @@ public class AdminServlet extends HttpServlet {
 		
 		if(request.getParameter("status").equals("AddNewFLight"))
 		{
-			String dept = request.getParameter("departure").toString();
-			String dest = request.getParameter("destination").toString();
-			String company = request.getParameter("company").toString();
+			String dept = request.getParameter("departure");
+			String dest = request.getParameter("destination");
+			String company = request.getParameter("company");
 			int seats = Integer.parseInt(request.getParameter("seats"));
-			String deptdate = request.getParameter("deptdatetime");
-			String destdate = request.getParameter("destdatetime");
-			
+
+			String deptdate = request.getParameter("deptdate");
+			String destdate = request.getParameter("destdate");
+			String price = request.getParameter("price");
+
+			boolean createNewFlight=false;
 			try {
-				boolean createNewFlight = AddNewFlight(request, response, dept, dest, company, seats, destdate, deptdate);
+				createNewFlight = AddNewFlight(request, response, dept, dest, company, seats, destdate, deptdate,price);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			response.getWriter().write(""+createNewFlight);
+
 		}
 		
 		if(request.getParameter("status").equals("AddNewAirport"))
@@ -144,15 +148,14 @@ public class AdminServlet extends HttpServlet {
 	}
 
 	private boolean AddNewFlight(HttpServletRequest request, HttpServletResponse response, String dept, String dest,
-			String company, int seats, String destdate, String deptdate) throws SQLException 
+			String company, int seats, String destdate, String deptdate,String price) throws SQLException 
 	{
 		LoginLogic ll = new LoginLogic();
-		Flights newFlight = new Flights(dept, dest, company, seats, destdate, deptdate );
+		Flights newFlight = new Flights(dept, dest, company, seats, destdate, deptdate,price);
 		boolean created=false;
 		try {
 			created = ll.createFlight(newFlight);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return created;
