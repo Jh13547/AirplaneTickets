@@ -22,6 +22,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
+import project.db.DbAccessImpl;
 import project.logic.LoginLogic;
 import project.object.Booking;
 import project.object.Flights;
@@ -257,7 +258,13 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			}
 			
 		}
-	
+		if(request.getParameter("getCities") != null) {
+			
+			DbAccessImpl db = new DbAccessImpl();
+			
+			
+			
+		}
 		//need to add the right stuff but this generates the search page correctly
 		//done
 //		if(request.getParameter("tstButton") != null)
