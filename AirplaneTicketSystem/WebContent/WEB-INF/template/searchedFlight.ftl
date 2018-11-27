@@ -4,8 +4,8 @@
 
                 <form id="searchform" action="FlightSearchLogin" method="POST">
                 	<table>
-                    <tr><td><label for="">Departure:</label></td> <td><input type="text" name="departure" id="dept" class="form-control"></td></tr>
                     <tr><td><label for="">Destination:</label></td> <td><input type="text" name="destination" id="dest" class="form-control"></td></tr>
+                    <tr><td><label for="">Departure:</label></td> <td><input type="text" name="departure" id="dept" class="form-control"></td></tr>
                     <tr><td><label for="">Date:</label></td> <td><input type="date" name="date" id="date" class="form-control"></td></tr>
                     <tr><td><label for="">Airline:</label></td> 
                     <td><select name="AirlineOption" id="AirlineOp" class="form-control">

@@ -1,7 +1,6 @@
 <div class="content">
     <form id="searchform" action="FlightSearchLogin" method="post">
     <input type="hidden" name="flSearch" value="Search">
-    <input type="hidden" name="indexpage" value="Search">
         <table>
         <tr>
         	<td>    
